@@ -41,6 +41,10 @@ group.add_argument(
     '-S', '--show_nginx_configs_command', action='store_true',
     help='生成 查找 nginx config指令串列'
 )
+group.add_argument(
+    '-T', '--create_test_url', action='store_true',
+    help='生成 測試網址'
+)
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
     '-m', '--print_command', action='store_true',
@@ -81,7 +85,7 @@ if __name__ == "__main__":
         commands = {}
 
         if args.dig_check_command:
-            commands[f'dig 檢查 record-{args.dig_check_command} 指令'] = slc.dig_check_command()
+            commands[f'檢查 record-{args.dig_check_command} 指令'] = slc.dig_check_command()
         if args.create_ssl_command:
             commands['新證書 certbot 指令'] = slc.create_ssl_command()
         if args.renew_ssl_command:
@@ -96,6 +100,8 @@ if __name__ == "__main__":
             commands['顯示證書資料夾指令'] = slc.show_ssl_certificates_command()
         if args.show_nginx_configs_command:
             commands['查找 nginx config 指令'] = slc.show_nginx_configs_command()
+        if args.create_test_url:
+            commands['生成 測試網址'] = slc.create_test_url()
 
         for title in commands.keys():
             if args.print_command:

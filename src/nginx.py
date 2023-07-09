@@ -131,3 +131,14 @@ class SSLNginxCommand():
             self.logger.debug(f'指令:\n{command}')
             command_list.append(command)
         return command_list
+
+    def create_test_url(self) -> list[str]:
+        """生成 測試網址
+
+        Returns:
+            list[str]: 指令串列
+        """
+        command_list = []
+        for domain in self.domains:
+            command_list.append(f'https://{domain}/')
+        return command_list
