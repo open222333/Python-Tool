@@ -30,3 +30,6 @@ with open(DOMAINS_JSON_PATH, 'r') as f:
 OUTPUT_PATH = conf.get('SETTING', 'OUTPUT_PATH', fallback='output')
 if not os.path.exists(OUTPUT_PATH):
     os.makedirs(OUTPUT_PATH)
+
+# 設定輸入資料的txt路徑 預設值 target.txt
+TXT_PATH = conf.get('SETTING', 'TXT_PATH', fallback='target.txt')

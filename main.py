@@ -73,6 +73,7 @@ nginx_logger.set_msg_handler()
 
 
 if __name__ == "__main__":
+
     for info in DOMAINS_INFO:
         slc = SSLNginxCommand(
             domains=str(info['domains']).split(','),
