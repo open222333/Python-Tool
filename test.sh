@@ -1,0 +1,1 @@
+python main.py -c -C -T -m
