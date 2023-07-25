@@ -1,10 +1,12 @@
 [
   {
+    "execute": false,
     "cloudflare_cli": "",
     "domains": "",
     "refer_domain": ""
   },
   {
+    "execute": false,
     "cloudflare_cli": "",
     "domains": "",
     "refer_domain": ""

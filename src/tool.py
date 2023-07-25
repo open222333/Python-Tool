@@ -45,8 +45,11 @@ def domain_encode(domain: str) -> str:
         str
     """
     import idna
-    punycode = idna.encode(domain).decode('utf-8')
-    return punycode
+    try:
+        punycode = idna.encode(domain).decode('utf-8')
+        return punycode
+    except Exception as err:
+        return err
 
 
 def generate_txt(path: str, commands: list, title: str = None):

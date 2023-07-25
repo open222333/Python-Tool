@@ -75,37 +75,38 @@ nginx_logger.set_msg_handler()
 if __name__ == "__main__":
 
     for info in DOMAINS_INFO:
-        slc = SSLNginxCommand(
-            domains=str(info['domains']).split(','),
-            cli_ini=info['cloudflare_cli'],
-            refer_domain=info['refer_domain'],
-            logger=nginx_logger
-        )
+        if info['execute']:
+            slc = SSLNginxCommand(
+                domains=str(info['domains']).split(','),
+                cli_ini=info['cloudflare_cli'],
+                refer_domain=info['refer_domain'],
+                logger=nginx_logger
+            )
 
-        command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
-        commands = {}
+            command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
+            commands = {}
 
-        if args.dig_check_command:
-            commands[f'檢查 record-{args.dig_check_command} 指令'] = slc.dig_check_command()
-        if args.create_ssl_command:
-            commands['新證書 certbot 指令'] = slc.create_ssl_command()
-        if args.renew_ssl_command:
-            commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
-        if args.revoke_ssl_command:
-            commands['註銷證書 certbot 指令'] = slc.revoke_ssl_command()
-        if args.cp_nginx_config_command:
-            commands['複製 nginx conf 指令'] = slc.cp_nginx_config_command()
-        if args.remove_conf_command:
-            commands['刪除 nginx config 指令'] = slc.remove_conf_command()
-        if args.show_ssl_certificates_command:
-            commands['顯示證書資料夾指令'] = slc.show_ssl_certificates_command()
-        if args.show_nginx_configs_command:
-            commands['查找 nginx config 指令'] = slc.show_nginx_configs_command()
-        if args.create_test_url:
-            commands['生成 測試網址'] = slc.create_test_url()
+            if args.dig_check_command:
+                commands[f'檢查 record-{args.dig_check_command} 指令'] = slc.dig_check_command()
+            if args.create_ssl_command:
+                commands['新證書 certbot 指令'] = slc.create_ssl_command()
+            if args.renew_ssl_command:
+                commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
+            if args.revoke_ssl_command:
+                commands['註銷證書 certbot 指令'] = slc.revoke_ssl_command()
+            if args.cp_nginx_config_command:
+                commands['複製 nginx conf 指令'] = slc.cp_nginx_config_command()
+            if args.remove_conf_command:
+                commands['刪除 nginx config 指令'] = slc.remove_conf_command()
+            if args.show_ssl_certificates_command:
+                commands['顯示證書資料夾指令'] = slc.show_ssl_certificates_command()
+            if args.show_nginx_configs_command:
+                commands['查找 nginx config 指令'] = slc.show_nginx_configs_command()
+            if args.create_test_url:
+                commands['生成 測試網址'] = slc.create_test_url()
 
-        for title in commands.keys():
-            if args.print_command:
-                print_command(commands[title])
-            if args.generate_txt:
-                generate_txt(command_txt_path, commands[title], title)
+            for title in commands.keys():
+                if args.print_command:
+                    print_command(commands[title])
+                if args.generate_txt:
+                    generate_txt(command_txt_path, commands[title], title)
