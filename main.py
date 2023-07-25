@@ -90,6 +90,7 @@ if __name__ == "__main__":
                 commands[f'檢查 record-{args.dig_check_command} 指令'] = slc.dig_check_command()
             if args.create_ssl_command:
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()
+                commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
             if args.renew_ssl_command:
                 commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
             if args.revoke_ssl_command:
@@ -107,6 +108,7 @@ if __name__ == "__main__":
 
             for title in commands.keys():
                 if args.print_command:
+                    print(title)
                     print_command(commands[title])
                 if args.generate_txt:
                     generate_txt(command_txt_path, commands[title], title)

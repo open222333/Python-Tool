@@ -3,12 +3,14 @@
     "execute": false,
     "cloudflare_cli": "",
     "domains": "",
-    "refer_domain": ""
+    "refer_domain": "",
+    "note": ""
   },
   {
     "execute": false,
     "cloudflare_cli": "",
     "domains": "",
-    "refer_domain": ""
+    "refer_domain": "",
+    "note": ""
   }
 ]

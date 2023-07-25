@@ -48,6 +48,22 @@ class SSLNginxCommand():
             command_list.append(command)
         return command_list
 
+    def create_check_ssl_command(self) -> list[str]:
+        """生成 檢查證書是否生成 指令串列
+
+        Returns:
+            list[str]: 指令串列
+        """
+        command_list = []
+        self.logger.info(f'create_ssl_command start')
+        for domain in self.domains:
+            if is_chinese(domain):
+                domain = domain_encode(domain)
+            command = f"ls archive/ | grep {domain}"
+            self.logger.debug(f'指令:\n{command}')
+            command_list.append(command)
+        return command_list
+
     def renew_ssl_command(self) -> list[str]:
         """生成 刷新證書 certbot 指令串列
 
