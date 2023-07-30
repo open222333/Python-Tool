@@ -80,7 +80,7 @@ def print_command(commands: list):
     print()
 
 
-def get_domain_list(path: str = None, show_msg=True, sld=True):
+def get_domain_list(path: str = None, show_msg=True, sld=True) -> set[list, str]:
     """解析郵件訊息 取得 域名
 
     Args:
@@ -89,12 +89,13 @@ def get_domain_list(path: str = None, show_msg=True, sld=True):
         sld (bool, optional): 回傳二級域名. Defaults to True.
 
     Returns:
-        _type_: _description_
+        set[list, str]: _description_
     """
     domain_list = []
     sld_list = []
     cloud_list = []
     count = 0
+    msg = ''
 
     if not os.path.exists(path):
         tool_logger.error(f'{path} 不存在')
@@ -115,7 +116,9 @@ def get_domain_list(path: str = None, show_msg=True, sld=True):
 
     if show_msg:
         for d in domain_list:
+            msg += f'{d}\n'
             tool_logger.info(d)
+        msg += f'總筆數 共{count}個\n去除www後共{len(domain_list)}個\n\n'
         tool_logger.info(f'總筆數 共{count}個\n去除www後共{len(domain_list)}個\n')
 
     if sld:
@@ -129,10 +132,14 @@ def get_domain_list(path: str = None, show_msg=True, sld=True):
                 sld_list.append(i)
         if show_msg:
             for d in sld_list:
+                msg += f'{d}\n'
                 tool_logger.info(d)
+            msg += f'二級域名 共{len(sld_list)}個\n\n'
             tool_logger.info(f'二級域名 共{len(sld_list)}個\n')
             for d in cloud_list:
+                msg += f'{d}\n'
                 tool_logger.info(d)
+            msg += f'需手動更新 共{len(cloud_list)}個\n\n'
             tool_logger.info(f'需手動更新 共{len(cloud_list)}個\n')
-        return sld_list
-    return domain_list
+        return (sld_list, msg)
+    return (domain_list, msg)
