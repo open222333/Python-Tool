@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     slc = SSLNginxCommand(
         domains=domain_list[0],
-        cli_ini=args.cli,
+        cli_ini=f'cli-{args.cli}.ini',
         refer_domain="",
         logger=txt_logger
     )
