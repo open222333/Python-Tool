@@ -6,7 +6,7 @@ from src.tool import generate_txt, print_command
 from src import DOMAINS_INFO, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
 
 
-parser = ArgumentParser()
+parser = ArgumentParser(description='根據json檔，生成指令')
 group = parser.add_argument_group('生成command功能')
 group.add_argument(
     '-d', '--dig_check_command', type=str,

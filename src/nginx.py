@@ -43,7 +43,10 @@ class SSLNginxCommand():
         for domain in self.domains:
             if is_chinese(domain):
                 domain = domain_encode(domain)
-            command = f"certbot -c {self.cli_ini} certonly --dns-cloudflare --no-autorenew -d {domain} -d *.{domain}"
+            if self.cli_ini:
+                command = f"certbot -c {self.cli_ini} certonly --dns-cloudflare --no-autorenew -d {domain} -d *.{domain}"
+            else:
+                command = f"certbot certonly --dns-cloudflare --no-autorenew -d {domain} -d *.{domain}"
             self.logger.debug(f'指令:\n{command}')
             command_list.append(command)
         return command_list
@@ -73,7 +76,10 @@ class SSLNginxCommand():
         command_list = []
         self.logger.info(f'renew_ssl_command start')
         for domain in self.domains:
-            command = f"certbot -c {self.cli_ini} renew --dns-cloudflare --force-renew --no-autorenew --cert-name {domain}"
+            if self.cli_ini:
+                command = f"certbot -c {self.cli_ini} renew --dns-cloudflare --force-renew --no-autorenew --cert-name {domain}"
+            else:
+                command = f"certbot renew --dns-cloudflare --force-renew --no-autorenew --cert-name {domain}"
             self.logger.debug(f'指令:\n{command}')
             command_list.append(command)
         return command_list

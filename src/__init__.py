@@ -5,7 +5,7 @@ import os
 
 
 conf = ConfigParser()
-conf.read('.conf/config.ini', encoding='utf-8')
+conf.read('conf/config.ini', encoding='utf-8')
 
 
 # logs相關參數
@@ -21,15 +21,26 @@ LOG_FILE_DISABLE = conf.getboolean('LOG', 'LOG_FILE_DISABLE', fallback=True)
 if LOG_DISABLE:
     logging.disable()
 
-# 設定資料的json路徑 預設值 .conf/domains.json
-DOMAINS_JSON_PATH = conf.get('SETTING', 'DOMAINS_JSON_PATH', fallback='.conf/domains.json')
+# 設定域名資料的json檔路徑 預設值 conf/domains.json
+DOMAINS_JSON_PATH = conf.get('SETTING', 'DOMAINS_JSON_PATH', fallback='conf/domains.json')
 with open(DOMAINS_JSON_PATH, 'r') as f:
     DOMAINS_INFO = json.loads(f.read())
 
-#  設定指令輸出txt路徑 預設值 output/command.txt
+# 設定輸出路徑 預設值 output
 OUTPUT_PATH = conf.get('SETTING', 'OUTPUT_PATH', fallback='output')
 if not os.path.exists(OUTPUT_PATH):
     os.makedirs(OUTPUT_PATH)
 
 # 設定輸入資料的txt路徑 預設值 target.txt
 TXT_PATH = conf.get('SETTING', 'TXT_PATH', fallback='target.txt')
+
+NGINX_DIR = conf.get('SETTING', 'NGINX_DIR', fallback='/etc/nginx')
+# 設定nameserver資料的json檔路徑 預設值 conf/ns_info.json
+NS_JSON_PATH = conf.get('SETTING', 'NS_JSON_PATH', fallback='conf/ns_info.json')
+with open(NS_JSON_PATH, 'r') as f:
+    NS_INFO = json.loads(f.read())
+
+# 設定主機資訊json檔路徑 預設值 conf/host.json
+HOST_JSON_PATH = conf.get('SETTING', 'HOST_JSON_PATH', fallback='conf/host.json')
+with open(NS_JSON_PATH, 'r') as f:
+    HOST_INFO = json.loads(f.read())

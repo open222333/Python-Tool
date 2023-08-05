@@ -1,7 +1,7 @@
 [
   {
     "execute": false,
-    "cloudflare_cli": "",
+    "cloudflare_cli": null,
     "domains": "",
     "refer_domain": "",
     "note": ""

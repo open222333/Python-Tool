@@ -1,0 +1,20 @@
+[
+  {
+    "execute": false,
+    "host": "",
+    "username": "",
+    "password": "",
+    "remote_path": "",
+    "local_path": "",
+    "note": ""
+  },
+  {
+    "execute": false,
+    "host": "",
+    "username": "",
+    "password": "",
+    "remote_path": "",
+    "local_path": "",
+    "note": ""
+  }
+]
