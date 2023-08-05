@@ -2,8 +2,7 @@ from src import NGINX_DIR, NS_INFO
 from src.nameserver import NameServerTool
 from src.tool import ProgressBar, get_all_files, get_domain_from_nginx_config
 from argparse import ArgumentParser
-from pprint import pprint
-import json
+
 
 parser = ArgumentParser(description='根據 nginx conf 設定檔名, 取得 domain')
 parser.add_argument('-o', '--output_filename', help='輸出檔名稱', default='check_nginx_nameserver_result.txt')

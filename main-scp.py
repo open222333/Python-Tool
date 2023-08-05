@@ -1,5 +1,4 @@
 import os
-import re
 from src.logger import Log
 from src import HOST_INFO
 from argparse import ArgumentParser
