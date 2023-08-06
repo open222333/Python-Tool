@@ -23,8 +23,11 @@ if LOG_DISABLE:
 
 # 設定域名資料的json檔路徑 預設值 conf/domains.json
 DOMAINS_JSON_PATH = conf.get('SETTING', 'DOMAINS_JSON_PATH', fallback='conf/domains.json')
-with open(DOMAINS_JSON_PATH, 'r') as f:
-    DOMAINS_INFO = json.loads(f.read())
+if os.path.exists(DOMAINS_JSON_PATH):
+    with open(DOMAINS_JSON_PATH, 'r') as f:
+        DOMAINS_INFO = json.loads(f.read())
+else:
+    DOMAINS_INFO = []
 
 # 設定輸出路徑 預設值 output
 OUTPUT_PATH = conf.get('SETTING', 'OUTPUT_PATH', fallback='output')
@@ -37,10 +40,16 @@ TXT_PATH = conf.get('SETTING', 'TXT_PATH', fallback='target.txt')
 NGINX_DIR = conf.get('SETTING', 'NGINX_DIR', fallback='/etc/nginx')
 # 設定nameserver資料的json檔路徑 預設值 conf/ns_info.json
 NS_JSON_PATH = conf.get('SETTING', 'NS_JSON_PATH', fallback='conf/ns_info.json')
-with open(NS_JSON_PATH, 'r') as f:
-    NS_INFO = json.loads(f.read())
+if os.path.exists(NS_JSON_PATH):
+    with open(NS_JSON_PATH, 'r') as f:
+        NS_INFO = json.loads(f.read())
+else:
+    NS_INFO = []
 
 # 設定主機資訊json檔路徑 預設值 conf/host.json
 HOST_JSON_PATH = conf.get('SETTING', 'HOST_JSON_PATH', fallback='conf/host.json')
-with open(NS_JSON_PATH, 'r') as f:
-    HOST_INFO = json.loads(f.read())
+if os.path.exists(HOST_JSON_PATH):
+    with open(HOST_JSON_PATH, 'r') as f:
+        HOST_INFO = json.loads(f.read())
+else:
+    HOST_INFO = []
