@@ -9,7 +9,7 @@ from src import DOMAINS_INFO, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
 parser = ArgumentParser(description='根據json檔，生成指令')
 group = parser.add_argument_group('生成command功能')
 group.add_argument(
-    '-d', '--dig_check_command', type=str,
+    '-d', '--dig_check_command', action='append', type=str,
     help='生成 產生dig檢查record 類型指令串列',
     choices=['SOA', 'NS', 'A', 'AAAA', 'PTR', 'CNAME', 'MX']
 )
@@ -87,7 +87,8 @@ if __name__ == "__main__":
             commands = {}
 
             if args.dig_check_command:
-                commands[f'檢查 record-{args.dig_check_command} 指令'] = slc.dig_check_command()
+                for dig_type in args.dig_check_command:
+                    commands[f'檢查 record-{dig_type} 指令'] = slc.dig_check_command(dig_type)
             if args.create_ssl_command:
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()
                 commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
