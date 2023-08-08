@@ -119,10 +119,10 @@ options:
 
 ```bash
 # 生成證書
-python main.py -c -C -T -m
+python main-ssl_command.py -c -C -T -m
 
 # 刷新證書
-python main.py -r -m
+python main-ssl_command.py -r -m
 
 # 解析 txt檔產生指令
 python main-txt.py --cli sample -m
