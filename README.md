@@ -6,7 +6,7 @@
 
 # 用法
 
-## main-ssl_command.py
+## main-ssl_command.py - 根據json檔，生成指令
 
 ```json
 // conf/domains.json 說明
@@ -65,7 +65,7 @@ options:
                         設定紀錄log等級 DEBUG,INFO,WARNING,ERROR,CRITICAL 預設WARNING
 ```
 
-## main-txt.py
+## main-txt.py - 根據txt檔，解析郵件格式並生成域名證書相關指令
 
 ```bash
 # 設定輸入資料的txt路徑 預設值 target.txt
@@ -88,7 +88,7 @@ options:
                         設定紀錄log等級 DEBUG,INFO,WARNING,ERROR,CRITICAL 預設WARNING
 ```
 
-## main-domain_encode.py
+## main-domain_encode.py - 批量域名轉碼（編碼）punycode格式
 
 ```bash
 usage: main-domain_encode.py [-h] [-f FILE_PATH] [-d OUTPUT]
@@ -103,16 +103,42 @@ options:
                         指定輸出結果文檔路徑
 ```
 
-## json檔說明
+## main-nameserver.py - 根據 nginx conf 設定檔名, 回傳匹配指定 ns 的 domain
 
 ```json
+// ns_info.json
 [
   {
-	"execute": false, // 是否參與比對
+    "execute": false, // 是否參與比對
     "name":"", // 名稱
     "ns":"" // ns 格式: test1.com,test2.com
   }
 ]
+```
+
+```bash
+usage: main-nameserver.py [-h] [-o OUTPUT_FILENAME]
+
+根據 nginx conf 設定檔名, 回傳匹配指定 ns 的 domain
+
+options:
+  -h, --help            show this help message and exit
+  -o OUTPUT_FILENAME, --output_filename OUTPUT_FILENAME
+                        輸出檔名稱
+```
+
+## main-scp.py - 批量傳送檔案(未完成)
+
+```bash
+usage: main-scp.py [-h] [-l LOG_LEVEL] [-t TEST]
+
+批量傳送檔案
+
+options:
+  -h, --help            show this help message and exit
+  -l LOG_LEVEL, --log_level LOG_LEVEL
+                        設定紀錄log等級 DEBUG,INFO,WARNING,ERROR,CRITICAL 預設WARNING
+  -t TEST, --test TEST  是否為測試
 ```
 
 # 常用

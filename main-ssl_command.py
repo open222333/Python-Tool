@@ -92,8 +92,10 @@ if __name__ == "__main__":
             if args.create_ssl_command:
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()
                 commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
+                commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
             if args.renew_ssl_command:
                 commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
+                commands['git 指令'] = ['git add .', 'git commit -m 刷新證書', 'git push']
             if args.revoke_ssl_command:
                 commands['註銷證書 certbot 指令'] = slc.revoke_ssl_command()
             if args.cp_nginx_config_command:
