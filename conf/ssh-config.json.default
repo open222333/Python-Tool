@@ -1,0 +1,10 @@
+[
+  {
+    "host": "test1",
+    "user": "root",
+    "host_name": "192.168.0.1",
+    "port": 22,
+    "server_alive_interval": 60,
+    "identity_file": "~/.ssh/id_rsa"
+  }
+]

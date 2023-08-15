@@ -53,3 +53,11 @@ if os.path.exists(HOST_JSON_PATH):
         HOST_INFO = json.loads(f.read())
 else:
     HOST_INFO = []
+
+# 設定ssh資訊json檔路徑 預設值 conf/ssh-config.json
+SSH_JSON_PATH = conf.get('SETTING', 'SSH_JSON_PATH', fallback='conf/ssh-config.json')
+if os.path.exists(SSH_JSON_PATH):
+    with open(SSH_JSON_PATH, 'r') as f:
+        SSH_CONFIG_INFO = json.loads(f.read())
+else:
+    SSH_CONFIG_INFO = []

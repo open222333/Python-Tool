@@ -25,3 +25,5 @@
 ; NS_JSON_PATH=
 ; 設定主機資訊json檔路徑 預設值 conf/host.json
 ; HOST_JSON_PATH=
+; 設定ssh資訊json檔路徑 預設值 conf/ssh-config.json
+; SSH_JSON_PATH=
