@@ -108,7 +108,8 @@ class Log():
         handler = TimedRotatingFileHandler(self.log_file, when=when, backupCount=amount)
         handler.namer = my_namer
         handler.setFormatter(self.formatter)
-        self.logger.addHandler(handler)
+        if self.has_handler(handler) == False:
+            self.logger.addHandler(handler)
 
     def set_file_handler(self, size: int = 1 * 1024 * 1024, file_amount: int = 1) -> RotatingFileHandler:
         """設置log檔案大小限制
@@ -130,7 +131,8 @@ class Log():
         self.log_file = os.path.join(self.log_path, f'{self.logfile_name}')
         handler = RotatingFileHandler(self.log_file, maxBytes=size, backupCount=file_amount)
         handler.setFormatter(self.formatter)
-        self.logger.addHandler(handler)
+        if self.has_handler(handler) == False:
+            self.logger.addHandler(handler)
 
     def set_msg_handler(self) -> logging.StreamHandler:
         """設置log steam
@@ -140,7 +142,8 @@ class Log():
         """
         handler = logging.StreamHandler()
         handler.setFormatter(self.formatter)
-        self.logger.addHandler(handler)
+        if self.has_handler(handler) == False:
+            self.logger.addHandler(handler)
 
     def set_log_formatter(self, formatter: str):
         """設置log格式 formatter
@@ -168,6 +171,20 @@ class Log():
             self.logger.setLevel(logging.ERROR)
         elif level == 'CRITICAL':
             self.logger.setLevel(logging.CRITICAL)
+
+    def has_handler(self, handler):
+        """是否 已存在handler
+
+        Args:
+            handler (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        for h in self.logger.handlers:
+            if isinstance(h, type(handler)):
+                return True
+        return False
 
     def disable_log(self):
         """關閉log
