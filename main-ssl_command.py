@@ -91,12 +91,12 @@ if __name__ == "__main__":
             if args.dig_check_command:
                 for dig_type in args.dig_check_command:
                     dig_check_commands = slc.dig_check_command(dig_type)
-                    commands[f'檢查 record-{dig_type} 指令'] = dig_check_commands
-                # results = []
-                # for dig_check_command in dig_check_commands:
-                #     result = subprocess.run(dig_check_command, capture_output=True, text=True)
-                #     results.append(result.stdout)
-                # commands[f'檢查 record-{dig_type} 結果'] = results
+                    # commands[f'檢查 record-{dig_type} 指令'] = dig_check_commands
+                results = []
+                for dig_check_command in dig_check_commands:
+                    result = subprocess.run(dig_check_command, shell=True, capture_output=True, text=True)
+                    results.append(f'{dig_check_command} 結果:\n{result.stdout}')
+                commands[f'檢查 record-{dig_type} 結果'] = results
             if args.create_ssl_command:
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()
                 commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
