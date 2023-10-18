@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 import subprocess
 
-from src.nginx import SSLNginxCommand
+from src.nginx import SSLNginxCommand, DownloadLink
 from src.logger import Log
 from src.tool import generate_txt, print_command
 from src import DOMAINS_INFO, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
@@ -47,6 +47,10 @@ group.add_argument(
     '-T', '--create_test_url', action='store_true',
     help='生成 測試網址'
 )
+group.add_argument(
+    '-D', '--create_download_url', action='store_true',
+    help='生成 下載包網址'
+)
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
     '-m', '--print_command', action='store_true',
@@ -59,6 +63,10 @@ show_group.add_argument(
 show_group.add_argument(
     '-l', '--log_level', type=str, help='設定紀錄log等級 DEBUG,INFO,WARNING,ERROR,CRITICAL 預設WARNING',
     choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], default=None
+)
+show_group.add_argument(
+    '--commonly', action='store_true',
+    help='常用指令 產生新證書certbot指令串列 複製 nginx conf 指令串列 測試網址'
 )
 args = parser.parse_args()
 
@@ -77,7 +85,7 @@ nginx_logger.set_msg_handler()
 if __name__ == "__main__":
 
     for info in DOMAINS_INFO:
-        if info['execute']:
+        if info.get('execute'):
             slc = SSLNginxCommand(
                 domains=str(info['domains']).split(','),
                 cli_ini=info['cloudflare_cli'],
@@ -116,6 +124,25 @@ if __name__ == "__main__":
                 commands['查找 nginx config 指令'] = slc.show_nginx_configs_command()
             if args.create_test_url:
                 commands['生成 測試網址'] = slc.create_test_url()
+            if args.commonly:
+                commands['新證書 certbot 指令'] = slc.create_ssl_command()
+                commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
+                commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
+                commands['複製 nginx conf 指令'] = slc.cp_nginx_config_command()
+                commands['生成 測試網址'] = slc.create_test_url()
+            if args.create_download_url:
+                dl = DownloadLink(
+                    domains=str(info['domains']).split(','),
+                    cli_ini=info['cloudflare_cli'],
+                    refer_domain=info['refer_domain'],
+                    logger=nginx_logger
+                )
+                commands['下載包域名 依照子域名排序'] = dl.create_download_link_main()
+                commands['下載包域名 依照主域名排序'] = dl.create_download_link_sub()
+                commands['新證書 certbot 指令'] = slc.create_ssl_command()
+                commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
+                commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
+                commands['下載包測試網址'] = dl.create_test_url()
 
             for title in commands.keys():
                 if args.print_command:

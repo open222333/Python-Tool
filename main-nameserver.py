@@ -21,7 +21,7 @@ if __name__ == " __main__":
             nst = NameServerTool(domain=file_name)
             if nst.is_domain():
                 for ns in NS_INFO:
-                    if ns['execute']:
+                    if ns.get('execute'):
                         nst.set_nameservers(ns['ns'])
                         if not nst.is_ns_match():
                             f.write(f'{file_name}: {ns["name"]}\n')

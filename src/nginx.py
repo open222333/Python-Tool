@@ -10,6 +10,7 @@ class SSLNginxCommand():
         self.refer_domain = refer_domain
 
         for domain in domains:
+            domain = domain.strip()
             if is_chinese(domain):
                 domain = domain_encode(domain)
             self.domains.append(domain)
@@ -163,4 +164,51 @@ class SSLNginxCommand():
         command_list = []
         for domain in self.domains:
             command_list.append(f'https://{domain}/')
+
+        for domain in self.domains:
+            command_list.append(f'https://www.{domain}/')
         return command_list
+
+
+class DownloadLink(SSLNginxCommand):
+
+    second_domains = ['badl', 'ba9', 'bajk', 'bain', 'ba988']
+
+    def set_second_domains(self, *second_domains):
+        self.second_domains = second_domains
+
+    def create_download_link_main(self):
+        """生成 下載包域名 依照主域名排序
+
+        Returns:
+            _type_: _description_
+        """
+        domain_list = []
+        for second_domain in self.second_domains:
+            for domain in self.domains:
+                domain_list.append(f'{second_domain}.{domain}')
+        return domain_list
+
+    def create_download_link_sub(self):
+        """生成 下載包域名 依照子域名排序
+
+        Returns:
+            _type_: _description_
+        """
+        domain_list = []
+        for domain in self.domains:
+            for second_domain in self.second_domains:
+                domain_list.append(f'{second_domain}.{domain}')
+        return domain_list
+
+    def create_test_url(self) -> list[str]:
+        """生成 下載包測試網址
+
+        Returns:
+            list[str]: _description_
+        """
+        domain_list = []
+        for domain in self.domains:
+            for second_domain in self.second_domains:
+                domain_list.append(f'https://{second_domain}.{domain}/monitor.png')
+        return domain_list
