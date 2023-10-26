@@ -87,6 +87,25 @@ def is_english(string: str) -> bool:
     return bool(re.search('[a-zA-Z]', string))
 
 
+def is_punycode(domain: str):
+    """是否為punycode
+
+    Args:
+        domain (str): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    # import idna
+    # try:
+    #     idna.decode(domain)
+    #     return True
+    # except idna.IDNAError:
+    #     return False
+    punycode_pattern = re.compile(r"xn--")
+    return punycode_pattern.search(domain)
+
+
 def domain_encode(domain: str) -> str:
     """域名轉碼（編碼） punycode格式
 
@@ -102,6 +121,26 @@ def domain_encode(domain: str) -> str:
     import idna
     try:
         punycode = idna.encode(domain).decode('utf-8')
+        return punycode
+    except Exception as err:
+        return err
+
+
+def domain_decode(domain: str) -> str:
+    """域名轉碼（解碼） punycode格式
+
+    輸入: 例子.com\n
+    輸出: xn--fsq33d9b.com\n
+
+    Args:
+        domain (str): 中文域名
+
+    Returns:
+        str
+    """
+    import idna
+    try:
+        punycode = idna.decode(domain)
         return punycode
     except Exception as err:
         return err

@@ -4,7 +4,7 @@ import subprocess
 
 from src.nginx import SSLNginxCommand, DownloadLink
 from src.logger import Log
-from src.tool import generate_txt, print_command
+from src.tool import generate_txt, print_command, is_punycode, domain_decode
 from src import DOMAINS_INFO, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
 
 
@@ -101,9 +101,13 @@ if __name__ == "__main__":
                     dig_check_commands = slc.dig_check_command(dig_type)
                     # commands[f'檢查 record-{dig_type} 指令'] = dig_check_commands
                 results = []
-                for dig_check_command in dig_check_commands:
+                for domain, dig_check_command in dig_check_commands.items():
                     result = subprocess.run(dig_check_command, shell=True, capture_output=True, text=True)
-                    results.append(f'{dig_check_command} 結果:\n{result.stdout}')
+                    msg = f'{dig_check_command}'
+                    if is_punycode(domain):
+                        msg = f'{msg} ({domain_decode(domain)})'
+                    msg = f'{msg} 結果:\n{result.stdout}'
+                    results.append(msg)
                 commands[f'檢查 record-{dig_type} 結果'] = results
             if args.create_ssl_command:
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()

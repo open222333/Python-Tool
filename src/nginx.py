@@ -16,22 +16,22 @@ class SSLNginxCommand():
             self.domains.append(domain)
         self.logger = logger
 
-    def dig_check_command(self, dig_type: str = 'A') -> list[str]:
+    def dig_check_command(self, dig_type: str = 'A') -> dict:
         """生成 產生 dig 檢查 record 類型指令串列
 
         Args:
             dig_type (str, optional): 指定 域名指向. Defaults to 'A'.
 
         Returns:
-            list[str]: 指令串列
+            dict: 指令串列
         """
-        command_list = []
+        command_dict = {}
         self.logger.info(f'dig_check_command start')
         for domain in self.domains:
             command = f'dig +short {domain} {dig_type}'
             self.logger.debug(f'指令:\n{command}')
-            command_list.append(command)
-        return command_list
+            command_dict[domain] = command
+        return command_dict
 
     def create_ssl_command(self) -> list[str]:
         """生成 產生新證書 certbot 指令串列
