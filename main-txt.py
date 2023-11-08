@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 from src.nginx import SSLNginxCommand
 from src.logger import Log
-from src.tool import generate_txt, print_command, get_domain_list
+from src.tool import generate_txt, print_command, get_domain_list_from_email
 from src import TXT_PATH, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
 
 parser = ArgumentParser(description='根據txt檔，解析郵件格式並生成域名證書相關指令')
@@ -36,7 +36,7 @@ txt_logger.set_msg_handler()
 
 if __name__ == "__main__":
 
-    domain_list = get_domain_list(TXT_PATH)
+    domain_list = get_domain_list_from_email(TXT_PATH)
 
     slc = SSLNginxCommand(
         domains=domain_list[0],

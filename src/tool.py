@@ -174,7 +174,16 @@ def print_command(commands: list):
     print()
 
 
-def get_domain_list(path: str = None, show_msg=True, sld=True) -> set[list, str]:
+def parse_domain(domain: str):
+    if len(domain.split('.')) > 2:
+        match = re.match(r'^(?P<subdomain>[^.]+)\.(?P<main_domain>.+\..+)$', domain)
+        if match:
+            return match.group('subdomain'), match.group('main_domain')
+    else:
+        return None, domain
+
+
+def get_domain_list_from_email(path: str = None, show_msg=True, sld=True) -> set[list, str]:
     """解析郵件訊息 取得 域名
 
     Args:
@@ -186,8 +195,8 @@ def get_domain_list(path: str = None, show_msg=True, sld=True) -> set[list, str]
         set[list, str]: _description_
     """
     domain_list = []
-    sld_list = []
-    cloud_list = []
+    domain_dict = {}
+
     count = 0
     msg = ''
 
@@ -196,46 +205,56 @@ def get_domain_list(path: str = None, show_msg=True, sld=True) -> set[list, str]
 
     with open(path, 'r') as f:
         content = f.read().splitlines()
+
     pattern = r'- name:'
-    for i in content:
-        if re.match(pattern, i):
+    for domain in content:
+        if re.match(pattern, domain):
             count += 1
-            i = re.sub(pattern, ' ', i).replace(' ', '')
-            sub_domain = re.findall(r'www\.(.*)', i)
+            domain = re.sub(pattern, ' ', domain).replace(' ', '')
+            sub_domain = re.findall(r'www\.(.*)', domain)
             if sub_domain:
                 if not sub_domain[0] in domain_list:
-                    domain_list.append(i)
+                    domain_list.append(domain)
             else:
-                domain_list.append(i)
+                domain_list.append(domain)
 
     if show_msg:
+        msg += f'\n總筆數 共{count}個 去除www後共{len(domain_list)}個\n'
+        tool_logger.info(f'\n總筆數 共{count}個 去除www後共{len(domain_list)}個\n')
         for d in domain_list:
             msg += f'{d}\n'
             tool_logger.info(d)
-        msg += f'總筆數 共{count}個\n去除www後共{len(domain_list)}個\n\n'
-        tool_logger.info(f'總筆數 共{count}個\n去除www後共{len(domain_list)}個\n')
 
     if sld:
-        for i in domain_list:
-            if len(i.split('.')) > 2:
-                cloud_list.append(i)
-                sub_domain = re.findall(r'\.(.*)', i)
-                if not sub_domain[0] in sld_list:
-                    sld_list.append(sub_domain[0])
+        for domain in domain_list:
+
+            subdomain, main_domain = parse_domain(domain)
+            if main_domain not in domain_dict.keys():
+                if subdomain != None:
+                    domain_dict[main_domain] = [subdomain]
+                else:
+                    domain_dict[main_domain] = []
             else:
-                sld_list.append(i)
+                if subdomain != None:
+                    domain_dict[main_domain].append(subdomain)
+
         if show_msg:
-            for d in sld_list:
-                msg += f'{d}\n'
-                tool_logger.info(d)
-            msg += f'二級域名 共{len(sld_list)}個\n\n'
-            tool_logger.info(f'二級域名 共{len(sld_list)}個\n')
-            for d in cloud_list:
-                msg += f'{d}\n'
-                tool_logger.info(d)
-            msg += f'需手動更新 共{len(cloud_list)}個\n\n'
-            tool_logger.info(f'需手動更新 共{len(cloud_list)}個\n')
-        return (sld_list, msg)
+            msg += f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n'
+            tool_logger.info(f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n\n')
+            for main_domain in domain_dict.keys():
+                for sub in domain_dict[main_domain]:
+
+                    msg += f'{sub}.{main_domain}\n'
+                    tool_logger.info(f'{sub}.{main_domain}')
+                msg += '\n'
+
+            msg += f'\n需手動更新 共{len(domain_dict.keys())}個\n'
+            tool_logger.info(f'\n需手動更新 共{len(domain_dict.keys())}個\n')
+            for main_domain in domain_dict.keys():
+                msg += f'{main_domain}\n'
+                tool_logger.info(main_domain)
+
+        return (domain_dict.keys(), msg)
     return (domain_list, msg)
 
 
