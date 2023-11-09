@@ -61,3 +61,12 @@ if os.path.exists(SSH_JSON_PATH):
         SSH_CONFIG_INFO = json.loads(f.read())
 else:
     SSH_CONFIG_INFO = []
+
+
+# cloudflare設定json檔路徑 預設值 conf/cloudflare.json
+CLOUDFLARE_JSON_PATH = conf.get('SETTING', 'CLOUDFLARE_JSON_PATH', fallback='conf/cloudflare.json')
+if os.path.exists(CLOUDFLARE_JSON_PATH):
+    with open(CLOUDFLARE_JSON_PATH, 'r') as f:
+        CLOUDFLARE_INFO = json.loads(f.read())
+else:
+    CLOUDFLARE_INFO = []

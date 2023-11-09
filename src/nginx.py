@@ -7,6 +7,9 @@ class SSLNginxCommand():
     def __init__(self, domains: list, cli_ini: str, refer_domain: str, logger: logging):
         self.domains = []
         self.cli_ini = cli_ini
+
+        if is_chinese(refer_domain):
+            refer_domain = domain_encode(refer_domain)
         self.refer_domain = refer_domain
 
         for domain in domains:
@@ -14,6 +17,7 @@ class SSLNginxCommand():
             if is_chinese(domain):
                 domain = domain_encode(domain)
             self.domains.append(domain)
+
         self.logger = logger
 
     def dig_check_command(self, dig_type: str = 'A') -> dict:

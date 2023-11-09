@@ -1,0 +1,18 @@
+[
+  {
+    "execute": false,
+    "api_key": "",
+    "api_token": "",
+    "email": "",
+    "domains_txt_path": "domains.txt",
+    "active_dnssec": false,
+    "records": [
+      {
+        "type": "A",
+        "name": "www",
+        "content": "192.168.0.1"
+      }
+    ],
+    "note": ""
+  }
+]

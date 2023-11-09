@@ -1,6 +1,8 @@
 output/
 logs/
+
 target.txt
+domains.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

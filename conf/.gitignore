@@ -3,3 +3,4 @@ ns_info.json
 host.json
 config.ini
 ssh-config.json
+cloudflare.json

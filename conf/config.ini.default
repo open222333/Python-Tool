@@ -27,3 +27,6 @@
 ; HOST_JSON_PATH=
 ; 設定ssh資訊json檔路徑 預設值 conf/ssh-config.json
 ; SSH_JSON_PATH=
+
+; cloudflare設定json檔路徑 預設值 conf/cloudflare.json
+; CLOUDFLARE_JSON_PATH=
