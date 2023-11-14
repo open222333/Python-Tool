@@ -1,0 +1,78 @@
+summary: ICP備案
+description: 檢查域名是否有ICP備案
+parameters:
+  - name: domain
+    in: path
+    type: string
+    required: true
+responses:
+  200:
+    description: 成功，返回域名的 ICP 備案結果
+    schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+        result:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  contentTypeName:
+                    type: string
+                    example: ""
+                  domain:
+                    type: string
+                    example: example.com
+                  domainId:
+                    type: integer
+                    format: int64
+                    example: 100000000000
+                  leaderName:
+                    type: string
+                    example: ""
+                  limitAccess:
+                    type: string
+                    example: "否"
+                  mainId:
+                    type: integer
+                    format: int64
+                    example: 100000000000
+                  mainLicence:
+                    type: string
+                    example: "豫ICP备99999999号"
+                  natureName:
+                    type: string
+                    example: "个人"
+                  serviceId:
+                    type: integer
+                    format: int64
+                    example: 100000000000
+                  serviceLicence:
+                    type: string
+                    example: "豫ICP备99999999号-1"
+                  unitName:
+                    type: string
+                    example: "范例"
+                  updateRecordTime:
+                    type: string
+                    example: "2000-01-01 00:00:00"
+            message:
+              type: string
+              example: "有備案"
+  500:
+    description: 服務器錯誤，無法獲取 ICP 備案結果
+    schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: array
+          items:
+            message:
+              type: string
+              example: "取得sign錯誤"

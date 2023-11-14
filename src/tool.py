@@ -120,10 +120,14 @@ def domain_encode(domain: str) -> str:
     """
     import idna
     try:
-        punycode = idna.encode(domain).decode('utf-8')
-        return punycode
+        if is_chinese(domain):
+            punycode = idna.encode(domain).decode('utf-8')
+            return punycode
+        else:
+            return domain
     except Exception as err:
-        return err
+        tool_logger.error(f'域名轉碼（編碼） punycode格式 發生錯誤: {err}')
+        return None
 
 
 def domain_decode(domain: str) -> str:
@@ -205,6 +209,77 @@ def get_domain_list_from_email(path: str = None, show_msg=True, sld=True) -> set
 
     with open(path, 'r') as f:
         content = f.read().splitlines()
+
+    pattern = r'- name:'
+    for domain in content:
+        if re.match(pattern, domain):
+            count += 1
+            domain = re.sub(pattern, ' ', domain).replace(' ', '')
+            sub_domain = re.findall(r'www\.(.*)', domain)
+            if sub_domain:
+                if not sub_domain[0] in domain_list:
+                    domain_list.append(domain)
+            else:
+                domain_list.append(domain)
+
+    if show_msg:
+        msg += f'\n總筆數 共{count}個 去除www後共{len(domain_list)}個\n'
+        tool_logger.info(f'\n總筆數 共{count}個 去除www後共{len(domain_list)}個\n')
+        for d in domain_list:
+            msg += f'{d}\n'
+            tool_logger.info(d)
+
+    if sld:
+        for domain in domain_list:
+
+            subdomain, main_domain = parse_domain(domain)
+            if main_domain not in domain_dict.keys():
+                if subdomain != None:
+                    domain_dict[main_domain] = [subdomain]
+                else:
+                    domain_dict[main_domain] = []
+            else:
+                if subdomain != None:
+                    domain_dict[main_domain].append(subdomain)
+
+        if show_msg:
+            msg += f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n'
+            tool_logger.info(f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n\n')
+            for main_domain in domain_dict.keys():
+                for sub in domain_dict[main_domain]:
+
+                    msg += f'{sub}.{main_domain}\n'
+                    tool_logger.info(f'{sub}.{main_domain}')
+                msg += '\n'
+
+            msg += f'\n需手動更新 共{len(domain_dict.keys())}個\n'
+            tool_logger.info(f'\n需手動更新 共{len(domain_dict.keys())}個\n')
+            for main_domain in domain_dict.keys():
+                msg += f'{main_domain}\n'
+                tool_logger.info(main_domain)
+
+        return (domain_dict.keys(), msg)
+    return (domain_list, msg)
+
+
+def get_domain_list_from_email_str(content: str = None, show_msg=True, sld=True) -> set[list, str]:
+    """解析郵件訊息 取得 域名
+
+    Args:
+        path (_type_, optional): 需解析txt路徑. Defaults to None.
+        show_msg (bool, optional): 顯示結果. Defaults to True.
+        sld (bool, optional): 回傳二級域名. Defaults to True.
+
+    Returns:
+        set[list, str]: _description_
+    """
+    domain_list = []
+    domain_dict = {}
+
+    count = 0
+    msg = ''
+
+    content = content.splitlines()
 
     pattern = r'- name:'
     for domain in content:
