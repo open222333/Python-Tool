@@ -5,7 +5,7 @@ import os
 
 
 conf = ConfigParser()
-conf.read(os.path.join('conf', 'config.ini', encoding='utf-8'))
+conf.read(os.path.join('conf', 'config.ini'))
 
 
 # logs相關參數
