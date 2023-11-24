@@ -1,14 +1,16 @@
 version: "3"
 services:
-  web:
+  web_tool:
     build: .
-    container_name: web
-    hostname: web
+    container_name: web_tool
+    hostname: web_tool
     ports:
+      - 80:80
       - 8000:8000
     volumes:
       - .:/usr/src/app
-    command: bash -c 'gunicorn -c conf/gunicorn.py "run:app"'
+    # command: bash -c 'gunicorn -c conf/gunicorn.py "run:app"'
+    command: bash -c 'python run.py'
     depends_on:
       - mongo
   mongo:
