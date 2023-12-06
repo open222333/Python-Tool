@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 import subprocess
 
-from src.nginx import SSLNginxCommand, DownloadLink
+from src.nginx import SSLNginxCommand, DownloadLink, WebLink
 from src.logger import Log
 from src.tool import generate_txt, print_command, is_punycode, domain_decode
 from src import DOMAINS_INFO, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
@@ -50,6 +50,10 @@ group.add_argument(
 group.add_argument(
     '-D', '--create_download_url', action='store_true',
     help='生成 下載包網址'
+)
+group.add_argument(
+    '-w', '--create_web_url', action='store_true',
+    help='生成 網站服務網址'
 )
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
@@ -141,12 +145,27 @@ if __name__ == "__main__":
                     refer_domain=info['refer_domain'],
                     logger=nginx_logger
                 )
-                commands['下載包域名 依照子域名排序'] = dl.create_download_link_main()
-                commands['下載包域名 依照主域名排序'] = dl.create_download_link_sub()
-                commands['新證書 certbot 指令'] = slc.create_ssl_command()
-                commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
+                commands['下載包域名 依照主域名排序'] = dl.create_link_sort_by_main()
+                commands['下載包域名 依照子域名排序'] = dl.create_link_sort_by_sub()
+                commands['新證書 certbot 指令'] = dl.create_ssl_command()
+                commands['檢查證書是否生成 指令'] = dl.create_check_ssl_command()
                 commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
-                commands['下載包測試網址'] = dl.create_test_url()
+                commands['下載包域名 測試網址'] = dl.create_test_url()
+            if args.create_web_url:
+                wl = WebLink(
+                    domains=str(info['domains']).split(','),
+                    cli_ini=info['cloudflare_cli'],
+                    refer_domain=info['refer_domain'],
+                    logger=nginx_logger
+                )
+                commands['網站服務域名 依照主域名排序'] = wl.create_link_sort_by_main()
+                commands['網站服務域名 依照子域名排序'] = wl.create_link_sort_by_sub()
+                commands['新證書 certbot 指令'] = wl.create_ssl_command()
+                commands['檢查證書是否生成 指令'] = wl.create_check_ssl_command()
+                commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
+                commands['網站服務域名 JK IN 測試網址'] = wl.create_test_url(web='jk')
+                commands['網站服務域名 AV9 測試網址'] = wl.create_test_url(web='av9')
+                commands['網站服務域名 PTV DUCK KISSME 測試網址'] = wl.create_test_url(web='ptv')
 
             for title in commands.keys():
                 if args.print_command:

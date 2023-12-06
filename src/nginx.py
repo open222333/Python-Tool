@@ -1,8 +1,11 @@
 from .tool import is_chinese, domain_encode
 import logging
+import re
 
 
 class SSLNginxCommand():
+
+    sub_domains = []
 
     def __init__(self, domains: list, cli_ini: str, refer_domain: str, logger: logging):
         self.domains = []
@@ -19,6 +22,13 @@ class SSLNginxCommand():
             self.domains.append(domain)
 
         self.logger = logger
+
+    def set_sub_domains(self, *sub_domains: str):
+        self.sub_domains = sub_domains
+
+    def add_sub_domains(self, *sub_domains: str):
+        for sub_domain in sub_domains:
+            self.sub_domains.append(sub_domain)
 
     def dig_check_command(self, dig_type: str = 'A') -> dict:
         """生成 產生 dig 檢查 record 類型指令串列
@@ -88,6 +98,40 @@ class SSLNginxCommand():
             self.logger.debug(f'指令:\n{command}')
             command_list.append(command)
         return command_list
+
+    def create_link_sort_by_main(self):
+        """根據子域名生成域名 依照主域名排序
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            domain_list = []
+            if len(self.sub_domains) == 0:
+                raise RuntimeError('未設置 sub_domains')
+            for sub_domain in self.sub_domains:
+                for domain in self.domains:
+                    domain_list.append(f'{sub_domain}.{domain}')
+            return domain_list
+        except Exception as err:
+            self.logger.error(f'根據子域名生成域名 依照主域名排序 發生錯誤: {err}')
+
+    def create_link_sort_by_sub(self):
+        """根據子域名生成域名 依照子域名排序
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            domain_list = []
+            if len(self.sub_domains) == 0:
+                raise RuntimeError('未設置 sub_domains')
+            for domain in self.domains:
+                for sub_domain in self.sub_domains:
+                    domain_list.append(f'{sub_domain}.{domain}')
+            return domain_list
+        except Exception as err:
+            self.logger.error(f'根據子域名生成域名 依照子域名排序 發生錯誤: {err}')
 
     def revoke_ssl_command(self) -> list[str]:
         """生成 註銷證書 certbot 指令串列
@@ -176,34 +220,7 @@ class SSLNginxCommand():
 
 class DownloadLink(SSLNginxCommand):
 
-    second_domains = ['badl', 'ba9', 'bajk', 'bain', 'ba988']
-
-    def set_second_domains(self, *second_domains):
-        self.second_domains = second_domains
-
-    def create_download_link_main(self):
-        """生成 下載包域名 依照主域名排序
-
-        Returns:
-            _type_: _description_
-        """
-        domain_list = []
-        for second_domain in self.second_domains:
-            for domain in self.domains:
-                domain_list.append(f'{second_domain}.{domain}')
-        return domain_list
-
-    def create_download_link_sub(self):
-        """生成 下載包域名 依照子域名排序
-
-        Returns:
-            _type_: _description_
-        """
-        domain_list = []
-        for domain in self.domains:
-            for second_domain in self.second_domains:
-                domain_list.append(f'{second_domain}.{domain}')
-        return domain_list
+    sub_domains = ['badl', 'ba9', 'bajk', 'bain', 'ba988']
 
     def create_test_url(self) -> list[str]:
         """生成 下載包測試網址
@@ -213,6 +230,46 @@ class DownloadLink(SSLNginxCommand):
         """
         domain_list = []
         for domain in self.domains:
-            for second_domain in self.second_domains:
-                domain_list.append(f'https://{second_domain}.{domain}/monitor.png')
+            for sub_domain in self.sub_domains:
+                domain_list.append(f'https://{sub_domain}.{domain}/monitor.png')
+        return domain_list
+
+
+class WebLink(SSLNginxCommand):
+
+    sub_domains = ['apit', 'cpit', 'rest', 'apiw', 'cpiw', 'resw']
+
+    def is_api(self, sub_domain: str):
+        pattern = re.compile(r'.*api.*')
+        return bool(re.match(pattern, sub_domain))
+
+    def is_cpi(self, sub_domain: str):
+        pattern = re.compile(r'.*cpi.*')
+        return bool(re.match(pattern, sub_domain))
+
+    def is_res(self, sub_domain: str):
+        pattern = re.compile(r'.*res.*')
+        return bool(re.match(pattern, sub_domain))
+
+    def create_test_url(self, web: str = None) -> list[str]:
+        """生成 測試網址
+
+        Returns:
+            list[str]: _description_
+        """
+        domain_list = []
+        for domain in self.domains:
+            for sub_domain in self.sub_domains:
+                if self.is_api(sub_domain):
+                    if web in ['jk', 'in'] or web == None:
+                        domain_list.append(f'https://{sub_domain}.{domain}/s1/monitor')
+                    if web in ['av9'] or web == None:
+                        domain_list.append(f'https://{sub_domain}.{domain}/v3/monitor')
+                    if web in ['988', 'duck', 'ptv'] or web == None:
+                        domain_list.append(f'https://{sub_domain}.{domain}/json.php?api=version&platform=android&time=123456')
+                if self.is_cpi(sub_domain):
+                    domain_list.append(f'https://{sub_domain}.{domain}/API/')
+                if self.is_res(sub_domain):
+                    if web in ['jk', 'in', 'av9'] or web == None:
+                        domain_list.append(f'https://{sub_domain}.{domain}/Asset/Landing/ad_landing_img.png')
         return domain_list
