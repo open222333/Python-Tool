@@ -1,19 +1,17 @@
 from .tool import is_chinese, domain_encode
+from datetime import datetime
 import logging
 import re
+import socket
+import ssl
 
 
-class SSLNginxCommand():
+class Domains():
 
     sub_domains = []
 
-    def __init__(self, domains: list, cli_ini: str, refer_domain: str, logger: logging):
+    def __init__(self, domains: list, logger: logging):
         self.domains = []
-        self.cli_ini = cli_ini
-
-        if is_chinese(refer_domain):
-            refer_domain = domain_encode(refer_domain)
-        self.refer_domain = refer_domain
 
         for domain in domains:
             domain = domain.strip()
@@ -29,6 +27,21 @@ class SSLNginxCommand():
     def add_sub_domains(self, *sub_domains: str):
         for sub_domain in sub_domains:
             self.sub_domains.append(sub_domain)
+
+    def get_domains(self):
+        return self.domains
+
+
+class SSLNginxCommand(Domains):
+
+    def __init__(self, domains: list, cli_ini: str, refer_domain: str, logger: logging):
+
+        if is_chinese(refer_domain):
+            refer_domain = domain_encode(refer_domain)
+        self.refer_domain = refer_domain
+
+        self.cli_ini = cli_ini
+        super().__init__(domains, logger)
 
     def dig_check_command(self, dig_type: str = 'A') -> dict:
         """生成 產生 dig 檢查 record 類型指令串列
@@ -273,3 +286,48 @@ class WebLink(SSLNginxCommand):
                     if web in ['jk', 'in', 'av9'] or web == None:
                         domain_list.append(f'https://{sub_domain}.{domain}/Asset/Landing/ad_landing_img.png')
         return domain_list
+
+
+class SSLCertificate(Domains):
+
+    def __init__(self, domains: list, logger: logging, port: int = 443):
+        """_summary_
+
+        Args:
+            domains (list): _description_
+            logger (logging): _description_
+            port (int, optional): ssl 證書 port. Defaults to 443.
+        """
+        super().__init__(domains, logger)
+        self.port = port
+
+    def get_ssl_certificate_info(self, domain: str):
+        """取得指定域名的 SSL 證書資訊
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            context = ssl.create_default_context()
+            with context.wrap_socket(socket.socket(), server_hostname=domain) as ssock:
+                ssock.connect((domain, self.port))
+                cert = ssock.getpeercert()
+            return cert
+        except Exception as err:
+            self.logger.error(f'{domain} {err}')
+
+    def get_ssl_certificate_expiration_date(self) -> dict:
+        """取得指定域名的 SSL 證書剩餘有效期的天數
+
+        Returns:
+            _type_: {域名:天數}
+        """
+        info = {}
+
+        for domain in self.domains:
+            cert = self.get_ssl_certificate_info(domain)
+            not_after = cert['notAfter']
+            expiration_date = datetime.strptime(not_after, '%b %d %H:%M:%S %Y %Z')
+            days_until_expiry = (expiration_date - datetime.now()).days
+            info[domain] = days_until_expiry
+        return info

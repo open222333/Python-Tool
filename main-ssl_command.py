@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 import subprocess
 
-from src.nginx import SSLNginxCommand, DownloadLink, WebLink
+from src.nginx import SSLNginxCommand, DownloadLink, WebLink, SSLCertificate
 from src.logger import Log
 from src.tool import generate_txt, print_command, is_punycode, domain_decode
 from src import DOMAINS_INFO, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
@@ -71,6 +71,10 @@ show_group.add_argument(
 show_group.add_argument(
     '--commonly', action='store_true',
     help='常用指令 產生新證書certbot指令串列 複製 nginx conf 指令串列 測試網址'
+)
+show_group.add_argument(
+    '--check_ssl_days', action='store_true',
+    help='常用指令 域名的 SSL 證書剩餘有效期的天數'
 )
 args = parser.parse_args()
 
@@ -166,6 +170,13 @@ if __name__ == "__main__":
                 commands['網站服務域名 JK IN 測試網址'] = wl.create_test_url(web='jk')
                 commands['網站服務域名 AV9 測試網址'] = wl.create_test_url(web='av9')
                 commands['網站服務域名 PTV DUCK KISSME 測試網址'] = wl.create_test_url(web='ptv')
+
+            if args.check_ssl_days:
+                sslc = SSLCertificate(
+                    domains=str(info['domains']).split(','),
+                    logger=nginx_logger
+                )
+                commands['域名的 SSL 證書剩餘有效期的天數'] = sslc.get_ssl_certificate_expiration_date()
 
             for title in commands.keys():
                 if args.print_command:
