@@ -128,6 +128,7 @@ if __name__ == "__main__":
                 commands['註銷證書 certbot 指令'] = slc.revoke_ssl_command()
             if args.cp_nginx_config_command:
                 commands['複製 nginx conf 指令'] = slc.cp_nginx_config_command()
+                commands['複製 nginx conf 指令(強制覆蓋)'] = slc.cp_nginx_config_command(force=True)
             if args.remove_conf_command:
                 commands['刪除 nginx config 指令'] = slc.remove_conf_command()
             if args.show_ssl_certificates_command:

@@ -160,7 +160,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def cp_nginx_config_command(self) -> list[str]:
+    def cp_nginx_config_command(self, force=False) -> list[str]:
         """生成 複製 nginx conf 指令串列
 
         Returns:
@@ -169,7 +169,10 @@ class SSLNginxCommand(Domains):
         command_list = []
         self.logger.info(f'cp_nginx_config_command start')
         for domain in self.domains:
-            command = f'cp {self.refer_domain}.conf {domain}.conf\nsed -i s/{self.refer_domain}/{domain}/g {domain}.conf'
+            if force:
+                command = f'yes | cp -f {self.refer_domain}.conf {domain}.conf\nsed -i s/{self.refer_domain}/{domain}/g {domain}.conf'
+            else:
+                command = f'cp {self.refer_domain}.conf {domain}.conf\nsed -i s/{self.refer_domain}/{domain}/g {domain}.conf'
             self.logger.debug(f'指令:\n{command}')
             command_list.append(command)
         return command_list
