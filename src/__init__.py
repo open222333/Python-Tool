@@ -71,6 +71,14 @@ if os.path.exists(CLOUDFLARE_JSON_PATH):
 else:
     CLOUDFLARE_INFO = []
 
+# cloudflare cli 文檔名稱 預設值 conf/cloudflare_cli.json
+CLOUDFLARE_CLI_JSON_PATH = conf.get('SETTING', 'CLOUDFLARE_CLI_JSON_PATH', fallback=os.path.join('conf', 'cloudflare_cli.json'))
+if os.path.exists(CLOUDFLARE_CLI_JSON_PATH):
+    with open(CLOUDFLARE_CLI_JSON_PATH, 'r') as f:
+        CLOUDFLARE_CLI_INFO = json.loads(f.read())
+else:
+    CLOUDFLARE_CLI_INFO = []
+
 # flask json 設定檔路徑 預設值 conf/flask.json
 FLASK_JSON_PATH = conf.get('SETTING', 'FLASK_JSON_PATH', fallback=os.path.join('conf', 'flask.json'))
 if os.path.exists(FLASK_JSON_PATH):

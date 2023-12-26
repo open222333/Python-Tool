@@ -3,11 +3,11 @@ from datetime import datetime
 from src.nginx import SSLNginxCommand
 from src.logger import Log
 from src.tool import generate_txt, print_command, get_domain_list_from_email
-from src import TXT_PATH, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH
+from src import TXT_PATH, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH, CLOUDFLARE_CLI_INFO
 
 parser = ArgumentParser(description='根據txt檔，解析郵件格式並生成域名證書相關指令')
 group = parser.add_argument_group('生成command功能')
-group.add_argument('--cli', type=str, help='指定cli檔', required=True)
+group.add_argument('--cli', choices=CLOUDFLARE_CLI_INFO, help='指定cli檔', required=True)
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
     '-m', '--print_command', action='store_true',

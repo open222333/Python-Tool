@@ -30,3 +30,5 @@
 
 ; cloudflare設定json檔路徑 預設值 conf/cloudflare.json
 ; CLOUDFLARE_JSON_PATH=
+; cloudflare cli 文檔名稱 預設值 conf/cloudflare_cli.json
+; CLOUDFLARE_CLI_JSON_PATH=
