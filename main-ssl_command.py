@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from datetime import datetime
 import subprocess
+import os
 
 from src.nginx import SSLNginxCommand, DownloadLink, WebLink, SSLCertificate
 from src.logger import Log
@@ -111,12 +112,14 @@ if __name__ == "__main__":
                 results = []
                 for domain, dig_check_command in dig_check_commands.items():
                     result = subprocess.run(dig_check_command, shell=True, capture_output=True, text=True)
+                    # result = os.system(dig_check_command)
                     msg = f'{dig_check_command}'
                     if is_punycode(domain):
                         msg = f'{msg} ({domain_decode(domain)})'
-                    msg = f'{msg} 結果:\n{result.stdout}'
+                    msg = f'{msg} 結果:\n{result}'
                     results.append(msg)
                 commands[f'檢查 record-{dig_type} 結果'] = results
+
             if args.create_ssl_command:
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()
                 commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
@@ -156,6 +159,32 @@ if __name__ == "__main__":
                 commands['檢查證書是否生成 指令'] = dl.create_check_ssl_command()
                 commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
                 commands['下載包域名 測試網址'] = dl.create_test_url()
+
+                import_cloudflare_txts = []
+                for domain in dl.domains:
+                    import_cloudflare_txt = ';; CNAME Records\n'
+                    for sub_domain in dl.sub_domains:
+                        import_cloudflare_txt += f'{sub_domain}\t1\tIN\tCNAME\t{sub_domain}.{domain}.cdn_domain.\n'
+
+                    import_cloudflare_txts.append(import_cloudflare_txt)
+
+                commands['匯入 cloudflare 用 (需替換 cdn_domain)'] = import_cloudflare_txts
+
+                # 子域名 dig 指令
+                # for dig_type in args.dig_check_command:
+                #     dig_check_commands = dl.dig_check_command(dig_type)
+                #     # commands[f'檢查 record-{dig_type} 指令'] = dig_check_commands
+                # results = []
+                # for domain, dig_check_command in dig_check_commands.items():
+                #     result = subprocess.run(dig_check_command, shell=True, capture_output=True, text=True)
+                #     # result = os.system(dig_check_command)
+                #     msg = f'{dig_check_command}'
+                #     if is_punycode(domain):
+                #         msg = f'{msg} ({domain_decode(domain)})'
+                #     msg = f'{msg} 結果:\n{result.stdout}'
+                #     results.append(msg)
+                # commands[f'檢查 record-{dig_type} 結果'] = results
+
             if args.create_web_url:
                 wl = WebLink(
                     domains=str(info['domains']).split(','),

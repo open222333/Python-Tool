@@ -238,6 +238,23 @@ class DownloadLink(SSLNginxCommand):
 
     sub_domains = ['badl', 'ba9', 'bajk', 'bain', 'ba988']
 
+    def get_sub_domains(self):
+        domains = []
+        for domain in self.domains:
+            for sub_domain in self.sub_domains:
+                domains.append(f'{sub_domain}.{domain}')
+        return domains
+
+    def dig_check_command(self, dig_type: str = 'A') -> dict:
+        command_dict = {}
+        self.logger.info(f'dig_check_command start')
+        for domain in self.domains:
+            for sub_domain in self.sub_domains:
+                command = f'dig +short {sub_domain}.{domain} {dig_type}'
+                self.logger.debug(f'指令:\n{command}')
+                command_dict[f'{sub_domain}.{domain}'] = command
+        return command_dict
+
     def create_test_url(self) -> list[str]:
         """生成 下載包測試網址
 
