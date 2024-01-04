@@ -153,6 +153,12 @@ if __name__ == "__main__":
                     refer_domain=info['refer_domain'],
                     logger=nginx_logger
                 )
+
+                if dl.cli_ini == 'cli-domainame99.ini':
+                    dl.add_sub_domains('badl', 'ba9', 'bajk', 'bain', 'ba988')
+                elif dl.cli_ini == 'cli-tv9999.ini':
+                    dl.add_sub_domains('batv', 'baduck')
+
                 commands['下載包域名 依照主域名排序'] = dl.create_link_sort_by_main()
                 commands['下載包域名 依照子域名排序'] = dl.create_link_sort_by_sub()
                 commands['新證書 certbot 指令'] = dl.create_ssl_command()

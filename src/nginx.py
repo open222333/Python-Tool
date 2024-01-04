@@ -236,8 +236,6 @@ class SSLNginxCommand(Domains):
 
 class DownloadLink(SSLNginxCommand):
 
-    sub_domains = ['badl', 'ba9', 'bajk', 'bain', 'ba988']
-
     def get_sub_domains(self):
         domains = []
         for domain in self.domains:
