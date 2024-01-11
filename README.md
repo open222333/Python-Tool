@@ -4,6 +4,23 @@
 生成 cerbort 指令
 ```
 
+## 目錄
+
+- [Python-Cerbort\_Tool](#python-cerbort_tool)
+	- [目錄](#目錄)
+	- [參考資料](#參考資料)
+- [用法](#用法)
+	- [main-ssl\_command.py - 根據json檔，生成指令](#main-ssl_commandpy---根據json檔生成指令)
+	- [main-txt.py - 根據txt檔，解析郵件格式並生成域名證書相關指令](#main-txtpy---根據txt檔解析郵件格式並生成域名證書相關指令)
+	- [main-domain\_encode.py - 批量域名轉碼（編碼）punycode格式](#main-domain_encodepy---批量域名轉碼編碼punycode格式)
+	- [main-nameserver.py - 根據 nginx conf 設定檔名, 回傳匹配指定 ns 的 domain](#main-nameserverpy---根據-nginx-conf-設定檔名-回傳匹配指定-ns-的-domain)
+	- [main-scp.py - 批量傳送檔案(未完成)](#main-scppy---批量傳送檔案未完成)
+- [常用](#常用)
+
+## 參考資料
+
+[]()
+
 # 用法
 
 ## main-ssl_command.py - 根據json檔，生成指令
