@@ -105,6 +105,9 @@ if __name__ == "__main__":
             command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
             commands = {}
 
+            # 將 note 當成分隔線
+            commands[f'{str(info.get("note")).center(100, "=")}'] = ''
+
             if args.dig_check_command:
                 for dig_type in args.dig_check_command:
                     dig_check_commands = slc.dig_check_command(dig_type)
