@@ -1,6 +1,7 @@
 [
   {
     "execute": false,
+    "product_name": "",
     "cloudflare_cli": null,
     "domains": "",
     "refer_domain": "",

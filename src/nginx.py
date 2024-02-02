@@ -9,6 +9,7 @@ import ssl
 class Domains():
 
     sub_domains = []
+    test_sub_domains = ['www']
 
     def __init__(self, domains: list, logger: logging):
         self.domains = []
@@ -27,6 +28,13 @@ class Domains():
     def add_sub_domains(self, *sub_domains: str):
         for sub_domain in sub_domains:
             self.sub_domains.append(sub_domain)
+
+    def set_test_sub_domains(self, *sub_domains: str):
+        self.test_sub_domains = sub_domains
+
+    def add_test_sub_domains(self, *sub_domains: str):
+        for sub_domain in sub_domains:
+            self.test_sub_domains.append(sub_domain)
 
     def get_domains(self):
         return self.domains
@@ -229,8 +237,9 @@ class SSLNginxCommand(Domains):
         for domain in self.domains:
             command_list.append(f'https://{domain}/')
 
-        for domain in self.domains:
-            command_list.append(f'https://www.{domain}/')
+        for test_sub_domain in self.sub_domains:
+            for domain in self.domains:
+                command_list.append(f'https://{test_sub_domain}.{domain}/')
         return command_list
 
 

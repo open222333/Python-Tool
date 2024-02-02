@@ -144,6 +144,11 @@ if __name__ == "__main__":
             if args.create_test_url:
                 commands['生成 測試網址'] = slc.create_test_url()
             if args.commonly:
+                if info.get('product_name') == '988':
+                    slc.set_sub_domains('www', 'h5')
+                else:
+                    slc.set_sub_domains('www')
+
                 commands['新證書 certbot 指令'] = slc.create_ssl_command()
                 commands['檢查證書是否生成 指令'] = slc.create_check_ssl_command()
                 commands['git 指令'] = ['git add .', 'git commit -m 新增證書', 'git push']
