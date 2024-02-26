@@ -86,3 +86,5 @@ if os.path.exists(FLASK_JSON_PATH):
         FLASK_INFO = json.loads(f.read())
 else:
     FLASK_INFO = {}
+
+TELEGRAM_API_TOKEN = conf.get('SETTING', 'TELEGRAM_API_TOKEN', fallback=None)

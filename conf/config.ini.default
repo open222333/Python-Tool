@@ -32,3 +32,7 @@
 ; CLOUDFLARE_JSON_PATH=
 ; cloudflare cli 文檔名稱 預設值 conf/cloudflare_cli.json
 ; CLOUDFLARE_CLI_JSON_PATH=
+
+; Telegram api token
+; TELEGRAM_API_TOKEN=
+; TELEGRAM_CHAT_ID=
