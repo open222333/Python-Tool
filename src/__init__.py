@@ -88,3 +88,6 @@ else:
     FLASK_INFO = {}
 
 TELEGRAM_API_TOKEN = conf.get('SETTING', 'TELEGRAM_API_TOKEN', fallback=None)
+
+# 設定json 轉 jsonb, 存放 json 檔 資料夾路徑 預設值 json_files/
+CONVERT_JSON_TO_JSONB_DIR_PATH = conf.get('SETTING', 'CONVERT_JSON_TO_JSONB_DIR_PATH', fallback='json_files')

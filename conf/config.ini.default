@@ -28,6 +28,9 @@
 ; 設定ssh資訊json檔路徑 預設值 conf/ssh-config.json
 ; SSH_JSON_PATH=
 
+; 設定json 轉 jsonb, 存放 json 檔 資料夾路徑 預設值 json_files/
+; CONVERT_JSON_TO_JSONB_DIR_PATH=
+
 ; cloudflare設定json檔路徑 預設值 conf/cloudflare.json
 ; CLOUDFLARE_JSON_PATH=
 ; cloudflare cli 文檔名稱 預設值 conf/cloudflare_cli.json
