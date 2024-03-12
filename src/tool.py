@@ -333,40 +333,40 @@ def get_domain_list_from_email_str(content: str = None, show_msg=True, sld=True)
     return (domain_list, msg)
 
 
-def get_all_files(dir_path, extensions: list, relative_path=False):
+def get_all_files(dir_path: str, extensions: list = None, add_abspath: str = False):
     """取得所有檔案
 
     Args:
-        dir_path (_type_): 檔案資料夾
-        extensions (_type_, optional): 指定副檔名,若無指定則全部列出. 可多個 tar, conf
-        relative_path (bool): 顯示相對路徑
+        dir_path (str): 檔案資料夾
+        extensions (str, optional): 指定副檔名,若無指定則全部列出. Defaults to None.
+        add_abspath (str, optional): 列出 絕對路徑. Defaults to False.
 
     Returns:
         _type_: _description_
     """
     target_file_path = []
-    path = Path(dir_path).absolute()
-    # print(path)
+    path = os.path.abspath(dir_path)
 
     for file in os.listdir(path):
 
-        _, file_extension = os.path.splitext(file)
+        if add_abspath:
+            target_path = f'{path}/{file}'
+        else:
+            target_path = f'{file}'
+
+        _, file_extension = os.path.splitext(target_path)
         if extensions:
             allow_extension = [f'.{e}' for e in extensions]
             if file_extension in allow_extension:
-                target_file_path.append(file)
+                target_file_path.append(target_path)
         else:
-            target_file_path.append(file)
+            target_file_path.append(target_path)
 
         # 遞迴
         if os.path.isdir(f'{dir_path}/{file}'):
-            sub_dir = f'{dir_path}/{file}'
-            files = get_all_files(sub_dir, extensions)
+            files = get_all_files(f'{dir_path}/{file}', extensions, add_abspath)
             for file in files:
-                if relative_path:
-                    target_file_path.append(f'{sub_dir}/{file}')
-                else:
-                    target_file_path.append(file)
+                target_file_path.append(file)
     target_file_path.sort()
     return target_file_path
 
