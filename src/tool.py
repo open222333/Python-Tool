@@ -333,12 +333,13 @@ def get_domain_list_from_email_str(content: str = None, show_msg=True, sld=True)
     return (domain_list, msg)
 
 
-def get_all_files(dir_path, extensions: list, get_relative_path=False):
+def get_all_files(dir_path, extensions: list, relative_path=False):
     """取得所有檔案
 
     Args:
         dir_path (_type_): 檔案資料夾
         extensions (_type_, optional): 指定副檔名,若無指定則全部列出. 可多個 tar, conf
+        relative_path (bool): 顯示相對路徑
 
     Returns:
         _type_: _description_
@@ -362,7 +363,7 @@ def get_all_files(dir_path, extensions: list, get_relative_path=False):
             sub_dir = f'{dir_path}/{file}'
             files = get_all_files(sub_dir, extensions)
             for file in files:
-                if get_relative_path:
+                if relative_path:
                     target_file_path.append(f'{sub_dir}/{file}')
                 else:
                     target_file_path.append(file)
