@@ -1,13 +1,15 @@
 from argparse import ArgumentParser
 from datetime import datetime
-from src.nginx import SSLNginxCommand
-from src.logger import Log
-from src.tool import generate_txt, print_command, get_domain_list_from_email
 from src import TXT_PATH, OUTPUT_PATH, LOG_LEVEL, LOG_FILE_DISABLE, LOG_PATH, CLOUDFLARE_CLI_INFO
+from src.logger import Log
+from src.nginx import SSLNginxCommand
+from src.tool import generate_txt, print_command, get_domain_list_from_email, get_all_files
+import os
 
 parser = ArgumentParser(description='根據txt檔，解析郵件格式並生成域名證書相關指令')
 group = parser.add_argument_group('生成command功能')
 group.add_argument('--cli', choices=CLOUDFLARE_CLI_INFO, help='指定cli檔', required=True)
+group.add_argument('-d', '--txt_dir_path', type=str, default='txt_dir', help='指定cli檔')
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
     '-m', '--print_command', action='store_true',
@@ -36,24 +38,32 @@ txt_logger.set_msg_handler()
 
 if __name__ == "__main__":
 
-    domain_list = get_domain_list_from_email(TXT_PATH)
+    os.makedirs(args.txt_dir_path, exist_ok=True)
+    files = get_all_files(args.txt_dir_path, extensions=['txt'], add_abspath=True)
 
-    slc = SSLNginxCommand(
-        domains=domain_list[0],
-        cli_ini=f'cli-{args.cli}.ini',
-        refer_domain="",
-        logger=txt_logger
-    )
+    for file in files:
+        commands = {}
 
-    command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
-    commands = {}
+        filename = os.path.basename(file)
+        commands[f'================{filename}================'] = ''
+        domain_list = get_domain_list_from_email(file)
 
-    commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
+        slc = SSLNginxCommand(
+            domains=domain_list[0],
+            cli_ini=f'cli-{args.cli}.ini',
+            refer_domain="",
+            logger=txt_logger
+        )
 
-    for title in commands.keys():
-        if args.print_command:
-            print(title)
-            print(domain_list[1])
-            print_command(commands[title])
-        if args.generate_txt:
-            generate_txt(command_txt_path, commands[title], title)
+        command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
+
+
+        commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
+
+        for title in commands.keys():
+            if args.print_command:
+                print(title)
+                print(domain_list[1])
+                print_command(commands[title])
+            if args.generate_txt:
+                generate_txt(command_txt_path, commands[title], title)

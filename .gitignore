@@ -2,6 +2,7 @@ output/
 logs/
 data/
 json_files/
+txt_dir/
 
 target.txt
 domains.txt
