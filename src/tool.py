@@ -1,6 +1,8 @@
 import re
 import os
 import sys
+import string
+import random
 from pathlib import Path
 from .logger import Log
 from . import LOG_LEVEL
@@ -180,7 +182,8 @@ def print_command(commands: list):
 
 def parse_domain(domain: str):
     if len(domain.split('.')) > 2:
-        match = re.match(r'^(?P<subdomain>[^.]+)\.(?P<main_domain>.+\..+)$', domain)
+        match = re.match(
+            r'^(?P<subdomain>[^.]+)\.(?P<main_domain>.+\..+)$', domain)
         if match:
             return match.group('subdomain'), match.group('main_domain')
     else:
@@ -244,7 +247,8 @@ def get_domain_list_from_email(path: str = None, show_msg=True, sld=True) -> set
 
         if show_msg:
             msg += f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n'
-            tool_logger.info(f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n\n')
+            tool_logger.info(
+                f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n\n')
             for main_domain in domain_dict.keys():
                 for sub in domain_dict[main_domain]:
 
@@ -315,7 +319,8 @@ def get_domain_list_from_email_str(content: str = None, show_msg=True, sld=True)
 
         if show_msg:
             msg += f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n'
-            tool_logger.info(f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n\n')
+            tool_logger.info(
+                f'\n二級域名 共{len(domain_dict.values()) + len(domain_dict.keys())}個\n\n')
             for main_domain in domain_dict.keys():
                 for sub in domain_dict[main_domain]:
 
@@ -364,7 +369,8 @@ def get_all_files(dir_path: str, extensions: list = None, add_abspath: str = Fal
 
         # 遞迴
         if os.path.isdir(f'{dir_path}/{file}'):
-            files = get_all_files(f'{dir_path}/{file}', extensions, add_abspath)
+            files = get_all_files(f'{dir_path}/{file}',
+                                  extensions, add_abspath)
             for file in files:
                 target_file_path.append(file)
     target_file_path.sort()
@@ -383,3 +389,34 @@ def get_domain_from_nginx_config(conf_name: str):
         _type_: _description_
     """
     return os.path.splitext(conf_name)[0]
+
+
+def generate_random_string(length: int = 12, punctuation: bool = True, digits: bool = True, lowercase: bool = True, uppercase: bool = True):
+    """產生隨機亂數字串
+
+    Args:
+        length (int, optional): 長度. Defaults to 12.
+        punctuation (bool, optional): 包含特殊符號. Defaults to True.
+        digits (bool, optional): 包含數字. Defaults to True.
+        lowercase (bool, optional): 包含字母大寫. Defaults to True.
+        uppercase (bool, optional): 包含字母小寫. Defaults to True.
+
+    Returns:
+        _type_: _description_
+    """
+    if lowercase and uppercase:
+        characters = string.ascii_letters
+    elif lowercase:
+        characters = string.ascii_lowercase
+    elif uppercase:
+        characters = string.ascii_uppercase
+    else:
+        characters = None
+
+    if punctuation:
+        characters += string.punctuation
+    if digits:
+        characters += string.digits
+
+    password = ''.join(random.choice(characters) for i in range(length))
+    return password
