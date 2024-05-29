@@ -8,8 +8,10 @@ import os
 
 parser = ArgumentParser(description='根據txt檔，解析郵件格式並生成域名證書相關指令')
 group = parser.add_argument_group('生成command功能')
-group.add_argument('--cli', choices=CLOUDFLARE_CLI_INFO, help='指定cli檔', required=True)
-group.add_argument('-d', '--txt_dir_path', type=str, default='txt_dir', help='指定cli檔')
+group.add_argument('--cli', choices=CLOUDFLARE_CLI_INFO,
+                   help='指定cli檔', default=None, required=False)
+group.add_argument('-d', '--txt_dir_path', type=str,
+                   default='txt_dir', help='指定cli檔')
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
     '-m', '--print_command', action='store_true',
@@ -39,9 +41,15 @@ txt_logger.set_msg_handler()
 if __name__ == "__main__":
 
     os.makedirs(args.txt_dir_path, exist_ok=True)
-    files = get_all_files(args.txt_dir_path, extensions=['txt'], add_abspath=True)
+    files = get_all_files(args.txt_dir_path, extensions=[
+                          'txt'], add_abspath=True)
 
     for file in files:
+        
+        if args.cli != None:
+            if args.cli != filename:
+                continue
+
         commands = {}
 
         filename = os.path.basename(file)
@@ -56,7 +64,6 @@ if __name__ == "__main__":
         )
 
         command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
-
 
         commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
 
