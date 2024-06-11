@@ -45,7 +45,7 @@ if __name__ == "__main__":
                           'txt'], add_abspath=True)
 
     for file in files:
-        
+
         if args.cli != None:
             if args.cli != filename:
                 continue
@@ -55,6 +55,9 @@ if __name__ == "__main__":
         filename = os.path.basename(file)
         commands[f'================{filename}================'] = ''
         domain_list = get_domain_list_from_email(file)
+
+        if len(domain_list[0]) == 0:
+            continue
 
         slc = SSLNginxCommand(
             domains=domain_list[0],
