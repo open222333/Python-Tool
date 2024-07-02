@@ -1,0 +1,382 @@
+- name:               qlaops.hebijinxiang.com
+        content:            qlaops.hebijinxiang.com.cdn.dnsv1.com.cn
+        url:                https://qlaops.hebijinxiang.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - qlaops.hebijinxiang.com.cdn.dnsv1.com.cn
+                2:
+                        - k4mourb4.slt.sched.tdnsv8.com
+                3:
+                        - 123.6.40.248
+                        - 115.56.90.188
+                        - 123.6.40.242
+                        - 123.6.40.224
+                        - 119.167.229.212
+                        - 123.6.40.213
+                        - 222.161.212.242
+                        - 116.177.225.240
+                        - 113.194.51.118
+                        - 27.221.71.101
+                        - 36.248.54.85
+                        - 59.80.47.124
+                        - 116.153.4.62
+                        - 42.56.81.104
+                        - 14.205.47.78
+        valid_to:           Apr 23 02:15:11 2024 GMT
+        days:               14
+        subjectaltname:     DNS:*.hebijinxiang.com, DNS:hebijinxiang.com
+        reason:             certificate will be expired soon, 911
+- name:               qc.mangowill.xyz
+        content:            qc.mangowill.xyz.cdn.dnsv1.com.cn
+        url:                https://qc.mangowill.xyz/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - qc.mangowill.xyz.cdn.dnsv1.com.cn
+                2:
+                        - ga4ihcnm.sched.sma.tdnsstic1.cn
+                3:
+                        - 119.188.150.101
+                        - 113.201.158.62
+                        - 123.234.2.61
+                        - 27.221.71.83
+                        - 14.205.47.136
+                        - 113.201.158.139
+                        - 123.6.37.172
+                        - 153.99.77.126
+                        - 221.204.166.213
+                        - 119.167.147.251
+                        - 116.136.170.124
+                        - 114.112.216.135
+                        - 218.12.71.38
+        valid_to:           Apr 15 22:13:54 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.mangowill.xyz, DNS:mangowill.xyz
+        reason:             certificate will be expired soon, 911
+- name:               apit2.nbbabl.com
+        content:            apit2.nbbabl.com.dsa.dnsv1.com.cn
+        url:                https://apit2.nbbabl.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - apit2.nbbabl.com.dsa.dnsv1.com.cn
+                2:
+                        - np6xdfli.sched.d0.tdnsdp1.cn
+                3:
+                        - 122.188.38.123
+                        - 1.56.98.101
+                        - 14.205.73.249
+                        - 221.204.43.242
+                        - 36.249.65.98
+                        - 113.207.30.62
+                        - 221.204.43.106
+                        - 218.24.83.116
+                        - 115.56.90.187
+                        - 61.243.13.121
+                        - 61.162.174.86
+                        - 116.153.64.182
+                        - 123.138.255.77
+                        - 220.194.123.111
+                        - 61.241.148.88
+        valid_to:           Apr 15 22:10:56 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.nbbabl.com, DNS:nbbabl.com
+        reason:             certificate will be expired soon, 911
+- name:               apiw.nbbabl.com
+        content:            apiw.nbbabl.com.cdn20.com
+        url:                https://apiw.nbbabl.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - apiw.nbbabl.com.cdn20.com
+                2:
+                        - 14.0.113.56
+        valid_to:           Apr 15 22:10:56 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.nbbabl.com, DNS:nbbabl.com
+        reason:             certificate will be expired soon, 911
+- name:               cpit.nbbabl.com
+        content:            cpit.nbbabl.com.dsa.dnsv1.com.cn
+        url:                https://cpit.nbbabl.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - cpit.nbbabl.com.dsa.dnsv1.com.cn
+                2:
+                        - lztpp817.sched.d0.tdnsdp1.cn
+                3:
+                        - 116.153.64.182
+                        - 122.188.38.123
+                        - 220.194.123.111
+                        - 61.241.148.88
+                        - 221.204.43.242
+                        - 61.243.13.121
+                        - 1.56.98.101
+                        - 115.56.90.187
+                        - 113.207.30.62
+                        - 123.138.255.77
+                        - 218.24.83.116
+                        - 36.249.65.98
+                        - 14.205.73.249
+                        - 61.162.174.86
+                        - 221.204.43.106
+        valid_to:           Apr 15 22:10:56 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.nbbabl.com, DNS:nbbabl.com
+        reason:             certificate will be expired soon, 911
+- name:               cpiw.nbbabl.com
+        content:            cpiw.nbbabl.com.cdn20.com
+        url:                https://cpiw.nbbabl.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - cpiw.nbbabl.com.cdn20.com
+                2:
+                        - 14.0.113.56
+        valid_to:           Apr 15 22:10:56 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.nbbabl.com, DNS:nbbabl.com
+        reason:             certificate will be expired soon, 911
+- name:               rest.nbbabl.com
+        content:            rest.nbbabl.com.dsa.dnsv1.com.cn
+        url:                https://rest.nbbabl.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - rest.nbbabl.com.dsa.dnsv1.com.cn
+                2:
+                        - l2wn1510.sched.d0.tdnsdp1.cn
+                3:
+                        - 218.24.83.116
+                        - 122.188.38.123
+                        - 113.207.30.62
+                        - 61.241.148.88
+                        - 115.56.90.187
+                        - 116.153.64.182
+                        - 1.56.98.101
+                        - 221.204.43.106
+                        - 61.162.174.86
+                        - 123.138.255.77
+                        - 36.249.65.98
+                        - 14.205.73.249
+                        - 220.194.123.111
+                        - 61.243.13.121
+                        - 221.204.43.242
+        valid_to:           Apr 15 22:10:56 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.nbbabl.com, DNS:nbbabl.com
+        reason:             certificate will be expired soon, 911
+- name:               resw.nbbabl.com
+        content:            resw.nbbabl.com.cdn20.com
+        url:                https://resw.nbbabl.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - resw.nbbabl.com.cdn20.com
+                2:
+                        - 14.0.113.56
+        valid_to:           Apr 15 22:10:56 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.nbbabl.com, DNS:nbbabl.com
+        reason:             certificate will be expired soon, 911
+- name:               qlcl.syxiangyunmy.com
+        content:            qlcl.syxiangyunmy.com.cdn.dnsv1.com.cn
+        url:                https://qlcl.syxiangyunmy.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - qlcl.syxiangyunmy.com.cdn.dnsv1.com.cn
+                2:
+                        - lvruyyum.slt.sched.tdnsv8.com
+                3:
+                        - 59.80.47.124
+                        - 116.177.225.240
+                        - 123.6.40.248
+                        - 123.6.40.224
+                        - 123.6.40.242
+                        - 113.194.51.118
+                        - 115.56.90.188
+                        - 222.161.212.242
+                        - 36.248.54.85
+                        - 27.221.71.101
+                        - 42.56.81.104
+                        - 119.167.229.212
+                        - 116.153.4.62
+                        - 14.205.47.78
+                        - 123.6.40.213
+        valid_to:           Apr 22 22:30:27 2024 GMT
+        days:               13
+        subjectaltname:     DNS:*.syxiangyunmy.com, DNS:syxiangyunmy.com
+        reason:             certificate will be expired soon, 911
+- name:               ba988.gjgij.com
+        content:            ba988.gjgij.com.d356ae33.cdnhwcggk22.com
+        url:                https://ba988.gjgij.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - ba988.gjgij.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 06:19:16 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.gjgij.com, DNS:gjgij.com
+        reason:             certificate will be expired soon, 911
+- name:               badl.gjgij.com
+        content:            badl.gjgij.com.d356ae33.cdnhwcggk22.com
+        url:                https://badl.gjgij.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - badl.gjgij.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 06:19:16 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.gjgij.com, DNS:gjgij.com
+        reason:             certificate will be expired soon, 911
+- name:               bain.gjgij.com
+        content:            bain.gjgij.com.d356ae33.cdnhwcggk22.com
+        url:                https://bain.gjgij.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - bain.gjgij.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 61.128.154.190
+                        - 118.123.207.189
+        valid_to:           Apr 17 06:19:16 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.gjgij.com, DNS:gjgij.com
+        reason:             certificate will be expired soon, 911
+- name:               bajk.gjgij.com
+        content:            bajk.gjgij.com.d356ae33.cdnhwcggk22.com
+        url:                https://bajk.gjgij.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - bajk.gjgij.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 61.128.154.190
+                        - 118.123.207.189
+        valid_to:           Apr 17 06:19:16 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.gjgij.com, DNS:gjgij.com
+        reason:             certificate will be expired soon, 911
+- name:               ba988.iaiga.com
+        content:            ba988.iaiga.com.d356ae33.cdnhwcggk22.com
+        url:                https://ba988.iaiga.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - ba988.iaiga.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 06:18:54 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.iaiga.com, DNS:iaiga.com
+        reason:             certificate will be expired soon, 911
+- name:               ba9.iaiga.com
+        content:            ba9.iaiga.com.d356ae33.cdnhwcggk22.com
+        url:                https://ba9.iaiga.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - ba9.iaiga.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 61.128.154.190
+                        - 118.123.207.189
+        valid_to:           Apr 17 06:18:54 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.iaiga.com, DNS:iaiga.com
+        reason:             certificate will be expired soon, 911
+- name:               badl.iaiga.com
+        content:            badl.iaiga.com.d356ae33.cdnhwcggk22.com
+        url:                https://badl.iaiga.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - badl.iaiga.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 06:18:54 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.iaiga.com, DNS:iaiga.com
+        reason:             certificate will be expired soon, 911
+- name:               bain.iaiga.com
+        content:            bain.iaiga.com.d356ae33.cdnhwcggk22.com
+        url:                https://bain.iaiga.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - bain.iaiga.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 61.128.154.190
+                        - 118.123.207.189
+        valid_to:           Apr 17 06:18:54 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.iaiga.com, DNS:iaiga.com
+        reason:             certificate will be expired soon, 911
+- name:               bajk.iaiga.com
+        content:            bajk.iaiga.com.d356ae33.cdnhwcggk22.com
+        url:                https://bajk.iaiga.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - bajk.iaiga.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 06:18:54 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.iaiga.com, DNS:iaiga.com
+        reason:             certificate will be expired soon, 911
+- name:               qc2.mangowill.xyz
+        content:            qc2.mangowill.xyz.cdn.dnsv1.com.cn
+        url:                https://qc2.mangowill.xyz/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - qc2.mangowill.xyz.cdn.dnsv1.com.cn
+                2:
+                        - n0bk3rfa.sched.sma.tdnsstic1.cn
+                3:
+                        - 119.188.150.101
+                        - 123.234.2.61
+                        - 221.204.166.213
+                        - 14.205.47.136
+                        - 27.221.71.83
+                        - 123.6.37.172
+                        - 218.12.71.38
+                        - 116.136.170.124
+                        - 119.167.147.251
+                        - 113.201.158.62
+                        - 114.112.216.135
+                        - 113.201.158.139
+                        - 153.99.77.126
+        valid_to:           Apr 15 22:13:54 2024 GMT
+        days:               6
+        subjectaltname:     DNS:*.mangowill.xyz, DNS:mangowill.xyz
+        reason:             certificate will be expired soon, 911

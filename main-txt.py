@@ -14,6 +14,10 @@ group.add_argument('-d', '--txt_dir_path', type=str,
                    default='txt_dir', help='指定cli檔')
 show_group = parser.add_argument_group('顯示command功能')
 show_group.add_argument(
+    '-c', '--clear_txt', action='store_true',
+    help='清除txt內容'
+)
+show_group.add_argument(
     '-m', '--print_command', action='store_true',
     help='終端機印出指令'
 )
@@ -77,3 +81,8 @@ if __name__ == "__main__":
                 print_command(commands[title])
             if args.generate_txt:
                 generate_txt(command_txt_path, commands[title], title)
+
+    if args.clear_txt:
+        for file in files:
+            with open(file, 'w') as f:
+                f.write('')

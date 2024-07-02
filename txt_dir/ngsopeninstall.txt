@@ -1,0 +1,24 @@
+- name:               cms-267sy.xyz
+        content:            139.162.68.76
+        url:                https://cms-267sy.xyz/
+        type:               A
+        dns_resolve_result:
+                1:
+                        - 139.162.68.76
+        valid_to:           Apr 21 15:03:49 2024 GMT
+        days:               12
+        subjectaltname:     DNS:*.cms-267sy.xyz, DNS:cms-267sy.xyz
+        reason:             certificate will be expired soon, 911
+- name:               www.cms-267sy.xyz
+        content:            cms-267sy.xyz
+        url:                https://www.cms-267sy.xyz/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - cms-267sy.xyz
+                2:
+                        - 139.162.68.76
+        valid_to:           Apr 21 15:03:49 2024 GMT
+        days:               12
+        subjectaltname:     DNS:*.cms-267sy.xyz, DNS:cms-267sy.xyz
+        reason:             certificate will be expired soon, 911

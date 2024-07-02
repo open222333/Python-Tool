@@ -1,0 +1,11 @@
+- name:               dbga.appdev.icu
+        content:            139.162.68.76
+        url:                https://dbga.appdev.icu/
+        type:               A
+        dns_resolve_result:
+                1:
+                        - 139.162.68.76
+        valid_to:           Jul 11 08:16:49 2024 GMT
+        days:               10
+        subjectaltname:     DNS:*.cms-267sy.xyz, DNS:cms-267sy.xyz
+        reason:             certificate will be expired soon, 911

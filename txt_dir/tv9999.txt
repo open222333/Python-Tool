@@ -1,0 +1,190 @@
+- name:               apit.xn--0lq70efwcf2n.com
+        content:            apit.xn--0lq70efwcf2n.com.dsa.dnsv1.com.cn
+        url:                https://apit.xn--0lq70efwcf2n.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - apit.xn--0lq70efwcf2n.com.dsa.dnsv1.com.cn
+                2:
+                        - aln2385t.sched.d0.tdnsdp1.cn
+                3:
+                        - 218.24.83.116
+                        - 221.204.43.106
+                        - 1.56.98.101
+                        - 36.249.65.98
+                        - 61.243.13.121
+                        - 61.241.148.88
+                        - 113.207.30.62
+                        - 122.188.38.123
+                        - 61.162.174.86
+                        - 123.138.255.77
+                        - 116.153.64.182
+                        - 14.205.73.249
+                        - 221.204.43.242
+                        - 220.194.123.111
+                        - 115.56.90.187
+        valid_to:           Apr 17 21:14:15 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.xn--0lq70efwcf2n.com, DNS:xn--0lq70efwcf2n.com
+        reason:             certificate will be expired soon, 911
+- name:               apiw.xn--0lq70efwcf2n.com
+        content:            apiw.xn--0lq70efwcf2n.com.cdn20.com
+        url:                https://apiw.xn--0lq70efwcf2n.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - apiw.xn--0lq70efwcf2n.com.cdn20.com
+                2:
+                        - 61.110.197.11
+        valid_to:           Apr 17 21:14:15 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.xn--0lq70efwcf2n.com, DNS:xn--0lq70efwcf2n.com
+        reason:             certificate will be expired soon, 911
+- name:               cpit.xn--0lq70efwcf2n.com
+        content:            cpit.xn--0lq70efwcf2n.com.dsa.dnsv1.com.cn
+        url:                https://cpit.xn--0lq70efwcf2n.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - cpit.xn--0lq70efwcf2n.com.dsa.dnsv1.com.cn
+                2:
+                        - 9wufogtu.sched.d0.tdnsdp1.cn
+                3:
+                        - 221.204.43.242
+                        - 61.241.148.88
+                        - 122.188.38.123
+                        - 116.153.64.182
+                        - 113.207.30.62
+                        - 220.194.123.111
+                        - 1.56.98.101
+                        - 221.204.43.106
+                        - 36.249.65.98
+                        - 61.162.174.86
+                        - 218.24.83.116
+                        - 14.205.73.249
+                        - 115.56.90.187
+                        - 123.138.255.77
+                        - 61.243.13.121
+        valid_to:           Apr 17 21:14:15 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.xn--0lq70efwcf2n.com, DNS:xn--0lq70efwcf2n.com
+        reason:             certificate will be expired soon, 911
+- name:               cpiw.xn--0lq70efwcf2n.com
+        content:            cpiw.xn--0lq70efwcf2n.com.cdn20.com
+        url:                https://cpiw.xn--0lq70efwcf2n.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - cpiw.xn--0lq70efwcf2n.com.cdn20.com
+                2:
+                        - 61.110.197.11
+        valid_to:           Apr 17 21:14:15 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.xn--0lq70efwcf2n.com, DNS:xn--0lq70efwcf2n.com
+        reason:             certificate will be expired soon, 911
+- name:               d-apit.xn--0lq70efwcf2n.com
+        content:            d-apit.xn--0lq70efwcf2n.com.dsa.dnsv1.com.cn
+        url:                https://d-apit.xn--0lq70efwcf2n.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - d-apit.xn--0lq70efwcf2n.com.dsa.dnsv1.com.cn
+                2:
+                        - a1amfo6o.sched.d0.tdnsdp1.cn
+                3:
+                        - 113.207.30.62
+                        - 123.138.255.77
+                        - 220.194.123.111
+                        - 218.24.83.116
+                        - 14.205.73.249
+                        - 61.241.148.88
+                        - 116.153.64.182
+                        - 122.188.38.123
+                        - 36.249.65.98
+                        - 221.204.43.242
+                        - 61.243.13.121
+                        - 1.56.98.101
+                        - 115.56.90.187
+                        - 61.162.174.86
+                        - 221.204.43.106
+        valid_to:           Apr 17 21:14:15 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.xn--0lq70efwcf2n.com, DNS:xn--0lq70efwcf2n.com
+        reason:             certificate will be expired soon, 911
+- name:               d-apiw.xn--0lq70efwcf2n.com
+        content:            d-apiw.xn--0lq70efwcf2n.com.cdn20.com
+        url:                https://d-apiw.xn--0lq70efwcf2n.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - d-apiw.xn--0lq70efwcf2n.com.cdn20.com
+                2:
+                        - 61.110.197.11
+        valid_to:           Apr 17 21:14:15 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.xn--0lq70efwcf2n.com, DNS:xn--0lq70efwcf2n.com
+        reason:             certificate will be expired soon, 911
+- name:               baduck.ffbfff.com
+        content:            baduck.ffbfff.com.d356ae33.cdnhwcggk22.com
+        url:                https://baduck.ffbfff.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - baduck.ffbfff.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 12:12:22 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.ffbfff.com, DNS:ffbfff.com
+        reason:             certificate will be expired soon, 911
+- name:               batv.ffbfff.com
+        content:            batv.ffbfff.com.d356ae33.cdnhwcggk22.com
+        url:                https://batv.ffbfff.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - batv.ffbfff.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 61.128.154.190
+                        - 118.123.207.189
+        valid_to:           Apr 17 12:12:22 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.ffbfff.com, DNS:ffbfff.com
+        reason:             certificate will be expired soon, 911
+- name:               baduck2.ffbfff.com
+        content:            baduck2.ffbfff.com.d356ae33.cdnhwcggk22.com
+        url:                https://baduck2.ffbfff.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - baduck2.ffbfff.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 12:12:22 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.ffbfff.com, DNS:ffbfff.com
+        reason:             certificate will be expired soon, 911
+- name:               bahy.ffbfff.com
+        content:            bahy.ffbfff.com.d356ae33.cdnhwcggk22.com
+        url:                https://bahy.ffbfff.com/
+        type:               CNAME
+        dns_resolve_result:
+                1:
+                        - bahy.ffbfff.com.d356ae33.cdnhwcggk22.com
+                2:
+                        - hcdnd101.smev6.cdnhwcibv122.com
+                3:
+                        - 118.123.207.189
+                        - 61.128.154.190
+        valid_to:           Apr 17 12:12:22 2024 GMT
+        days:               8
+        subjectaltname:     DNS:*.ffbfff.com, DNS:ffbfff.com
+        reason:             certificate will be expired soon, 911
