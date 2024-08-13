@@ -72,13 +72,13 @@ if __name__ == "__main__":
 
         command_txt_path = f'{OUTPUT_PATH}/commands-{datetime.now().__format__("%Y%m%d")}.txt'
 
-        commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
+        # commands['刷新證書 certbot 指令'] = slc.renew_ssl_command()
 
         for title in commands.keys():
             if args.print_command:
                 print(title)
                 print(domain_list[1])
-                print_command(commands[title])
+                # print_command(commands[title])
             if args.generate_txt:
                 generate_txt(command_txt_path, commands[title], title)
 
