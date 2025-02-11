@@ -190,7 +190,7 @@ def parse_domain(domain: str):
         return None, domain
 
 
-def get_domain_list_from_email(path: str = None, show_msg=True, sld=True) -> set[list, str]:
+def get_domain_list_from_email(path: str = None, show_msg=True, sld=True):
     """解析郵件訊息 取得 域名
 
     Args:
@@ -266,7 +266,7 @@ def get_domain_list_from_email(path: str = None, show_msg=True, sld=True) -> set
     return (domain_list, msg)
 
 
-def get_domain_list_from_email_str(content: str = None, show_msg=True, sld=True) -> set[list, str]:
+def get_domain_list_from_email_str(content: str = None, show_msg=True, sld=True):
     """解析郵件訊息 取得 域名
 
     Args:
