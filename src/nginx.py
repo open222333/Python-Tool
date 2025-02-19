@@ -68,7 +68,7 @@ class SSLNginxCommand(Domains):
             command_dict[domain] = command
         return command_dict
 
-    def create_ssl_command(self) -> list[str]:
+    def create_ssl_command(self):
         """生成 產生新證書 certbot 指令串列
 
         Returns:
@@ -87,7 +87,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def create_check_ssl_command(self) -> list[str]:
+    def create_check_ssl_command(self):
         """生成 檢查證書是否生成 指令串列
 
         Returns:
@@ -103,7 +103,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def renew_ssl_command(self) -> list[str]:
+    def renew_ssl_command(self):
         """生成 刷新證書 certbot 指令串列
 
         Returns:
@@ -154,7 +154,7 @@ class SSLNginxCommand(Domains):
         except Exception as err:
             self.logger.error(f'根據子域名生成域名 依照子域名排序 發生錯誤: {err}')
 
-    def revoke_ssl_command(self) -> list[str]:
+    def revoke_ssl_command(self):
         """生成 註銷證書 certbot 指令串列
 
         Returns:
@@ -168,7 +168,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def cp_nginx_config_command(self, force=False) -> list[str]:
+    def cp_nginx_config_command(self, force=False):
         """生成 複製 nginx conf 指令串列
 
         Returns:
@@ -185,7 +185,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def remove_conf_command(self) -> list[str]:
+    def remove_conf_command(self):
         """生成 刪除 nginx config 指令串列
 
         Returns:
@@ -199,7 +199,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def show_ssl_certificates_command(self) -> list[str]:
+    def show_ssl_certificates_command(self):
         """生成 顯示證書資料夾指令串列
 
         Returns:
@@ -213,7 +213,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def show_nginx_configs_command(self) -> list[str]:
+    def show_nginx_configs_command(self):
         """生成 查找 nginx config 指令串列
 
         Returns:
@@ -227,7 +227,7 @@ class SSLNginxCommand(Domains):
             command_list.append(command)
         return command_list
 
-    def create_test_url(self) -> list[str]:
+    def create_test_url(self):
         """生成 測試網址
 
         Returns:
@@ -262,7 +262,7 @@ class DownloadLink(SSLNginxCommand):
                 command_dict[f'{sub_domain}.{domain}'] = command
         return command_dict
 
-    def create_test_url(self) -> list[str]:
+    def create_test_url(self):
         """生成 下載包測試網址
 
         Returns:
@@ -291,7 +291,7 @@ class WebLink(SSLNginxCommand):
         pattern = re.compile(r'.*res.*')
         return bool(re.match(pattern, sub_domain))
 
-    def create_test_url(self, web: str = None) -> list[str]:
+    def create_test_url(self, web: str = None):
         """生成 測試網址
 
         Returns:
