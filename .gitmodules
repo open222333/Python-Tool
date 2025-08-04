@@ -1,3 +1,0 @@
-[submodule "mongo_backup"]
-	path = mongo_backup
-	url = https://github.com/open222333/Python-MongoBackup.git
